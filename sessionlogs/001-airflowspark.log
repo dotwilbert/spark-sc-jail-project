@@ -1,0 +1,1162 @@
+(base) wilbert@wilbert-serwal:~/Projects/development/spark-container$ docker-compose exec airflowspark /bin/bash
+(base) airflow@f9ed595ef8e7:~$ ls -l /opt/spark-2.4.4-bin-hadoop2.7/bin/
+total 112
+-rwxr-xr-x 1 1000 1000 1089 Aug 27 21:30 beeline
+-rw-r--r-- 1 1000 1000 1064 Aug 27 21:30 beeline.cmd
+-rwxr-xr-x 1 1000 1000 5440 Aug 27 21:30 docker-image-tool.sh
+-rwxr-xr-x 1 1000 1000 1933 Aug 27 21:30 find-spark-home
+-rw-r--r-- 1 1000 1000 2681 Aug 27 21:30 find-spark-home.cmd
+-rw-r--r-- 1 1000 1000 1892 Aug 27 21:30 load-spark-env.cmd
+-rw-r--r-- 1 1000 1000 2025 Aug 27 21:30 load-spark-env.sh
+-rwxr-xr-x 1 1000 1000 2987 Aug 27 21:30 pyspark
+-rw-r--r-- 1 1000 1000 1540 Aug 27 21:30 pyspark2.cmd
+-rw-r--r-- 1 1000 1000 1170 Aug 27 21:30 pyspark.cmd
+-rwxr-xr-x 1 1000 1000 1030 Aug 27 21:30 run-example
+-rw-r--r-- 1 1000 1000 1223 Aug 27 21:30 run-example.cmd
+-rwxr-xr-x 1 1000 1000 3196 Aug 27 21:30 spark-class
+-rw-r--r-- 1 1000 1000 2817 Aug 27 21:30 spark-class2.cmd
+-rw-r--r-- 1 1000 1000 1180 Aug 27 21:30 spark-class.cmd
+-rwxr-xr-x 1 1000 1000 1039 Aug 27 21:30 sparkR
+-rw-r--r-- 1 1000 1000 1097 Aug 27 21:30 sparkR2.cmd
+-rw-r--r-- 1 1000 1000 1168 Aug 27 21:30 sparkR.cmd
+-rwxr-xr-x 1 1000 1000 3122 Aug 27 21:30 spark-shell
+-rw-r--r-- 1 1000 1000 1818 Aug 27 21:30 spark-shell2.cmd
+-rw-r--r-- 1 1000 1000 1178 Aug 27 21:30 spark-shell.cmd
+-rwxr-xr-x 1 1000 1000 1065 Aug 27 21:30 spark-sql
+-rw-r--r-- 1 1000 1000 1118 Aug 27 21:30 spark-sql2.cmd
+-rw-r--r-- 1 1000 1000 1173 Aug 27 21:30 spark-sql.cmd
+-rwxr-xr-x 1 1000 1000 1040 Aug 27 21:30 spark-submit
+-rw-r--r-- 1 1000 1000 1155 Aug 27 21:30 spark-submit2.cmd
+-rw-r--r-- 1 1000 1000 1180 Aug 27 21:30 spark-submit.cmd
+(base) airflow@f9ed595ef8e7:~$ /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit --master spark://sparkmaster:7077 /opt/spark-2.4.4-bin-hadoop2.7/examples/
+jars/ src/  
+(base) airflow@f9ed595ef8e7:~$ /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit --master spark://sparkmaster:7077 /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/
+java/      python/    r/         resources/ scala/     
+(base) airflow@f9ed595ef8e7:~$ /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit --master spark://sparkmaster:7077 /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/
+als.py                  kmeans.py               ml/                     pagerank.py             pi.py                   sql/                    streaming/              wordcount.py
+avro_inputformat.py     logistic_regression.py  mllib/                  parquet_inputformat.py  sort.py                 status_api_demo.py      transitive_closure.py   
+(base) airflow@f9ed595ef8e7:~$ /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit --master spark://sparkmaster:7077 /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py 
+19/10/01 17:32:05 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+19/10/01 17:32:05 INFO SparkContext: Running Spark version 2.4.4
+19/10/01 17:32:05 INFO SparkContext: Submitted application: PythonPi
+19/10/01 17:32:05 INFO SecurityManager: Changing view acls to: airflow
+19/10/01 17:32:05 INFO SecurityManager: Changing modify acls to: airflow
+19/10/01 17:32:05 INFO SecurityManager: Changing view acls groups to: 
+19/10/01 17:32:05 INFO SecurityManager: Changing modify acls groups to: 
+19/10/01 17:32:05 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(airflow); groups with view permissions: Set(); users  with modify permissions: Set(airflow); groups with modify permissions: Set()
+19/10/01 17:32:06 INFO Utils: Successfully started service 'sparkDriver' on port 40881.
+19/10/01 17:32:06 INFO SparkEnv: Registering MapOutputTracker
+19/10/01 17:32:06 INFO SparkEnv: Registering BlockManagerMaster
+19/10/01 17:32:06 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+19/10/01 17:32:06 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+19/10/01 17:32:06 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-094e4722-51af-4c80-a84c-befc9372fbbc
+19/10/01 17:32:06 INFO MemoryStore: MemoryStore started with capacity 366.3 MB
+19/10/01 17:32:06 INFO SparkEnv: Registering OutputCommitCoordinator
+19/10/01 17:32:06 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+19/10/01 17:32:06 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://f9ed595ef8e7:4040
+19/10/01 17:32:06 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://sparkmaster:7077...
+19/10/01 17:32:06 INFO TransportClientFactory: Successfully created connection to sparkmaster/172.18.0.3:7077 after 22 ms (0 ms spent in bootstraps)
+19/10/01 17:32:06 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20191001173206-0000
+19/10/01 17:32:06 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44061.
+19/10/01 17:32:06 INFO NettyBlockTransferService: Server created on f9ed595ef8e7:44061
+19/10/01 17:32:06 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+19/10/01 17:32:06 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20191001173206-0000/0 on worker-20191001173009-172.18.0.4-34589 (172.18.0.4:34589) with 12 core(s)
+19/10/01 17:32:06 INFO StandaloneSchedulerBackend: Granted executor ID app-20191001173206-0000/0 on hostPort 172.18.0.4:34589 with 12 core(s), 1024.0 MB RAM
+19/10/01 17:32:06 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20191001173206-0000/1 on worker-20191001173009-172.18.0.5-46535 (172.18.0.5:46535) with 12 core(s)
+19/10/01 17:32:06 INFO StandaloneSchedulerBackend: Granted executor ID app-20191001173206-0000/1 on hostPort 172.18.0.5:46535 with 12 core(s), 1024.0 MB RAM
+19/10/01 17:32:06 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, f9ed595ef8e7, 44061, None)
+19/10/01 17:32:06 INFO BlockManagerMasterEndpoint: Registering block manager f9ed595ef8e7:44061 with 366.3 MB RAM, BlockManagerId(driver, f9ed595ef8e7, 44061, None)
+19/10/01 17:32:06 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, f9ed595ef8e7, 44061, None)
+19/10/01 17:32:06 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, f9ed595ef8e7, 44061, None)
+19/10/01 17:32:06 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20191001173206-0000/0 is now RUNNING
+19/10/01 17:32:06 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20191001173206-0000/1 is now RUNNING
+19/10/01 17:32:06 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+19/10/01 17:32:06 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/home/airflow/spark-warehouse').
+19/10/01 17:32:06 INFO SharedState: Warehouse path is 'file:/home/airflow/spark-warehouse'.
+19/10/01 17:32:07 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+19/10/01 17:32:07 INFO SparkContext: Starting job: reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44
+19/10/01 17:32:07 INFO DAGScheduler: Got job 0 (reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44) with 2 output partitions
+19/10/01 17:32:07 INFO DAGScheduler: Final stage: ResultStage 0 (reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44)
+19/10/01 17:32:07 INFO DAGScheduler: Parents of final stage: List()
+19/10/01 17:32:07 INFO DAGScheduler: Missing parents: List()
+19/10/01 17:32:07 INFO DAGScheduler: Submitting ResultStage 0 (PythonRDD[1] at reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44), which has no missing parents
+19/10/01 17:32:07 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 6.2 KB, free 366.3 MB)
+19/10/01 17:32:07 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 4.2 KB, free 366.3 MB)
+19/10/01 17:32:07 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on f9ed595ef8e7:44061 (size: 4.2 KB, free: 366.3 MB)
+19/10/01 17:32:07 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1161
+19/10/01 17:32:07 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 0 (PythonRDD[1] at reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44) (first 15 tasks are for partitions Vector(0, 1))
+19/10/01 17:32:07 INFO TaskSchedulerImpl: Adding task set 0.0 with 2 tasks
+19/10/01 17:32:07 INFO CoarseGrainedSchedulerBackend$DriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.18.0.4:56578) with ID 0
+19/10/01 17:32:07 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, 172.18.0.4, executor 0, partition 0, PROCESS_LOCAL, 7856 bytes)
+19/10/01 17:32:07 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, 172.18.0.4, executor 0, partition 1, PROCESS_LOCAL, 7856 bytes)
+19/10/01 17:32:07 INFO CoarseGrainedSchedulerBackend$DriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.18.0.5:54094) with ID 1
+19/10/01 17:32:07 INFO BlockManagerMasterEndpoint: Registering block manager 172.18.0.4:35155 with 366.3 MB RAM, BlockManagerId(0, 172.18.0.4, 35155, None)
+19/10/01 17:32:08 INFO BlockManagerMasterEndpoint: Registering block manager 172.18.0.5:36149 with 366.3 MB RAM, BlockManagerId(1, 172.18.0.5, 36149, None)
+19/10/01 17:32:08 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 172.18.0.4:35155 (size: 4.2 KB, free: 366.3 MB)
+19/10/01 17:32:08 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 692 ms on 172.18.0.4 (executor 0) (1/2)
+19/10/01 17:32:08 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 705 ms on 172.18.0.4 (executor 0) (2/2)
+19/10/01 17:32:08 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+19/10/01 17:32:08 INFO PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 40059
+19/10/01 17:32:08 INFO DAGScheduler: ResultStage 0 (reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44) finished in 1.313 s
+19/10/01 17:32:08 INFO DAGScheduler: Job 0 finished: reduce at /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py:44, took 1.352641 s
+Pi is roughly 3.143660
+19/10/01 17:32:08 INFO SparkUI: Stopped Spark web UI at http://f9ed595ef8e7:4040
+19/10/01 17:32:08 INFO StandaloneSchedulerBackend: Shutting down all executors
+19/10/01 17:32:08 INFO CoarseGrainedSchedulerBackend$DriverEndpoint: Asking each executor to shut down
+19/10/01 17:32:08 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+19/10/01 17:32:08 INFO MemoryStore: MemoryStore cleared
+19/10/01 17:32:08 INFO BlockManager: BlockManager stopped
+19/10/01 17:32:08 INFO BlockManagerMaster: BlockManagerMaster stopped
+19/10/01 17:32:08 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+19/10/01 17:32:08 INFO SparkContext: Successfully stopped SparkContext
+19/10/01 17:32:09 INFO ShutdownHookManager: Shutdown hook called
+19/10/01 17:32:09 INFO ShutdownHookManager: Deleting directory /tmp/spark-38a340e7-f638-4234-b2bc-854cb38ef1e1
+19/10/01 17:32:09 INFO ShutdownHookManager: Deleting directory /tmp/spark-aaa4a5e1-e13c-4089-8e31-6f56d53422c9
+19/10/01 17:32:09 INFO ShutdownHookManager: Deleting directory /tmp/spark-aaa4a5e1-e13c-4089-8e31-6f56d53422c9/pyspark-429b237e-12cd-4d83-98be-c1ca5d41dccc
+(base) airflow@f9ed595ef8e7:~$ ls -l /bigdata/
+total 0
+(base) airflow@f9ed595ef8e7:~$ ls -ld /bigdata
+drwxrwxrwx 2 root root 10 Sep 25 07:35 /bigdata
+(base) airflow@f9ed595ef8e7:~$ touch bigdata/test.txt
+touch: cannot touch 'bigdata/test.txt': No such file or directory
+(base) airflow@f9ed595ef8e7:~$ touch /bigdata/test.txt
+(base) airflow@f9ed595ef8e7:~$ ls -l /bigdata/
+total 0
+-rw-r--r-- 1 airflow airflow 0 Oct  1 17:33 test.txt
+(base) airflow@f9ed595ef8e7:~$ rm /bigdata/test.txt 
+(base) airflow@f9ed595ef8e7:~$ conda env list
+# conda environments:
+#
+base                  *  /opt/miniconda
+airflow-project          /opt/miniconda/envs/airflow-project
+sc-jail-project          /opt/miniconda/envs/sc-jail-project
+
+(base) airflow@f9ed595ef8e7:~$ mkdir -p scripts/sc-jail-project
+(base) airflow@f9ed595ef8e7:~$ touch scripts/sc-jail-project/dl-santa-claradpcs.py
+(base) airflow@f9ed595ef8e7:~$ sudo apt-get install vim
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  vim-common vim-runtime xxd
+Suggested packages:
+  ctags vim-doc vim-scripts
+The following NEW packages will be installed:
+  vim vim-common vim-runtime xxd
+0 upgraded, 4 newly installed, 0 to remove and 4 not upgraded.
+Need to get 7,390 kB of archives.
+After this operation, 33.7 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://cdn-fastly.deb.debian.org/debian buster/main amd64 xxd amd64 2:8.1.0875-5 [140 kB]
+Get:2 http://cdn-fastly.deb.debian.org/debian buster/main amd64 vim-common all 2:8.1.0875-5 [195 kB]
+Get:3 http://cdn-fastly.deb.debian.org/debian buster/main amd64 vim-runtime all 2:8.1.0875-5 [5,775 kB]
+Get:4 http://cdn-fastly.deb.debian.org/debian buster/main amd64 vim amd64 2:8.1.0875-5 [1,280 kB]
+Fetched 7,390 kB in 3s (2,940 kB/s)
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76, <> line 4.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.28.1 /usr/local/share/perl/5.28.1 /usr/lib/x86_64-linux-gnu/perl5/5.28 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.28 /usr/share/perl/5.28 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 4.)
+debconf: falling back to frontend: Teletype
+Selecting previously unselected package xxd.
+(Reading database ... 13634 files and directories currently installed.)
+Preparing to unpack .../xxd_2%3a8.1.0875-5_amd64.deb ...
+Unpacking xxd (2:8.1.0875-5) ...
+Selecting previously unselected package vim-common.
+Preparing to unpack .../vim-common_2%3a8.1.0875-5_all.deb ...
+Unpacking vim-common (2:8.1.0875-5) ...
+Selecting previously unselected package vim-runtime.
+Preparing to unpack .../vim-runtime_2%3a8.1.0875-5_all.deb ...
+Adding 'diversion of /usr/share/vim/vim81/doc/help.txt to /usr/share/vim/vim81/doc/help.txt.vim-tiny by vim-runtime'
+Adding 'diversion of /usr/share/vim/vim81/doc/tags to /usr/share/vim/vim81/doc/tags.vim-tiny by vim-runtime'
+Unpacking vim-runtime (2:8.1.0875-5) ...
+Selecting previously unselected package vim.
+Preparing to unpack .../vim_2%3a8.1.0875-5_amd64.deb ...
+Unpacking vim (2:8.1.0875-5) ...
+Setting up xxd (2:8.1.0875-5) ...
+Setting up vim-common (2:8.1.0875-5) ...
+Setting up vim-runtime (2:8.1.0875-5) ...
+Setting up vim (2:8.1.0875-5) ...
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff (vimdiff) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/vi.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/vi.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/vi.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/vi.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/vi.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/vi.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/vi.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/vi.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view (view) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/view.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/view.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/view.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/view.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/view.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/view.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/view.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/view.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/ex.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/ex.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/ex.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/ex.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/ex.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/ex.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/ex.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/ex.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/editor.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/editor.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/editor.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/editor.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/editor.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/editor.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/editor.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group editor) doesn't exist
+(base) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dl-santa-claradpcs.py
+(base) airflow@f9ed595ef8e7:~$ conda env list
+# conda environments:
+#
+base                  *  /opt/miniconda
+airflow-project          /opt/miniconda/envs/airflow-project
+sc-jail-project          /opt/miniconda/envs/sc-jail-project
+
+(base) airflow@f9ed595ef8e7:~$ conda activate sc-jail-project
+(sc-jail-project) airflow@f9ed595ef8e7:~$ mv scripts/sc-jail-project/dl-santa-claradpcs.py scripts/sc-jail-project/dag-sc-jail.py
+(sc-jail-project) airflow@f9ed595ef8e7:~$ chmod 77 scripts/sc-jail-project/*.py
+(sc-jail-project) airflow@f9ed595ef8e7:~$ ls -l scripts/sc-jail-project/
+total 4
+----rwxrwx 1 airflow airflow 1026 Oct  1 18:05 dag-sc-jail.py
+(sc-jail-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dl-santa-clara-dpcs.py
+(sc-jail-project) airflow@f9ed595ef8e7:~$ chmod 777 scripts/sc-jail-project/*.py
+(sc-jail-project) airflow@f9ed595ef8e7:~$ script
+script        scriptreplay  
+(sc-jail-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 3, in <module>
+    import airflow
+ModuleNotFoundError: No module named 'airflow'
+(sc-jail-project) airflow@f9ed595ef8e7:~$ conda activate airflow-project
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test
+[2019-10-01 18:09:24,018] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=586
+[2019-10-01 18:09:24,132] {__init__.py:51} INFO - Using executor LocalExecutor
+usage: dag-sc-jail.py test [-h] [-sd SUBDIR] [-dr] [-tp TASK_PARAMS] [-pm]
+                           task_id execution_date
+dag-sc-jail.py test: error: the following arguments are required: task_id, execution_date
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py 
+[2019-10-01 18:09:59,216] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=588
+[2019-10-01 18:09:59,316] {__init__.py:51} INFO - Using executor LocalExecutor
+usage: dag-sc-jail.py [-h]
+                      {list_tasks,backfill,test,run,pause,unpause,list_dag_runs}
+                      ...
+dag-sc-jail.py: error: the following arguments are required: subcommand
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py list_tasks
+[2019-10-01 18:10:08,547] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=589
+[2019-10-01 18:10:08,646] {__init__.py:51} INFO - Using executor LocalExecutor
+dd_population_sheet
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dag-sc-jail.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py list_tasks
+[2019-10-01 18:11:03,454] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=593
+[2019-10-01 18:11:03,552] {__init__.py:51} INFO - Using executor LocalExecutor
+dl_population_sheet
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test
+[2019-10-01 18:11:08,483] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=594
+[2019-10-01 18:11:08,582] {__init__.py:51} INFO - Using executor LocalExecutor
+usage: dag-sc-jail.py test [-h] [-sd SUBDIR] [-dr] [-tp TASK_PARAMS] [-pm]
+                           task_id execution_date
+dag-sc-jail.py test: error: the following arguments are required: task_id, execution_date
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+[2019-10-01 18:12:08,483] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=598
+[2019-10-01 18:12:08,584] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 18:12:08,765] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:12:08+00:00 [None]>
+[2019-10-01 18:12:08,827] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:12:08+00:00 [None]>
+[2019-10-01 18:12:08,828] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:12:08,828] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 18:12:08,828] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:12:08,829] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-01T18:12:08+00:00
+[2019-10-01 18:12:08,879] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 18:12:08,880] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=tutorial
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T18:12:08+00:00
+[2019-10-01 18:12:08,880] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmp3blk6z9_/dl_population_sheetyyhg408p
+[2019-10-01 18:12:08,880] {bash_operator.py:115} INFO - Running command: /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191001-santa-clara-daily-population-sheet.pdf
+[2019-10-01 18:12:08,884] {bash_operator.py:124} INFO - Output:
+[2019-10-01 18:12:10,491] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@f9ed595ef8e7:~$ ls -l /bigdata/
+total 112
+-rw-r--r-- 1 airflow airflow 114550 Oct  1 18:12 20191001-santa-clara-daily-population-sheet.pdf
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dag-sc-jail.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ rm /bigdata/20191001-santa-clara-daily-population-sheet.pdf 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+[2019-10-01 18:14:41,758] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=610
+[2019-10-01 18:14:41,858] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 18:14:42,041] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:14:41+00:00 [None]>
+[2019-10-01 18:14:42,044] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:14:41+00:00 [None]>
+[2019-10-01 18:14:42,044] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:14:42,044] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 18:14:42,044] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:14:42,045] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-01T18:14:41+00:00
+[2019-10-01 18:14:42,056] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 18:14:42,056] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=tutorial
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T18:14:41+00:00
+[2019-10-01 18:14:42,057] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpp1nyslbm/dl_population_sheet_xpbtqsc
+[2019-10-01 18:14:42,057] {bash_operator.py:115} INFO - Running command: conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191001-santa-clara-daily-population-sheet.pdf
+[2019-10-01 18:14:42,062] {bash_operator.py:124} INFO - Output:
+[2019-10-01 18:14:42,164] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,164] {bash_operator.py:128} INFO - CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+[2019-10-01 18:14:42,164] {bash_operator.py:128} INFO - To initialize your shell, run
+[2019-10-01 18:14:42,164] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,164] {bash_operator.py:128} INFO -     $ conda init <SHELL_NAME>
+[2019-10-01 18:14:42,164] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - Currently supported shells are:
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO -   - bash
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO -   - fish
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO -   - tcsh
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO -   - xonsh
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO -   - zsh
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO -   - powershell
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - See 'conda init --help' for more information and options.
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,165] {bash_operator.py:128} INFO - 
+[2019-10-01 18:14:42,892] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@f9ed595ef8e7:~$ which conda
+/opt/miniconda/condabin/conda
+(airflow-project) airflow@f9ed595ef8e7:~$ /opt/miniconda/bin/
+2to3               bzegrep            conda              lz4                lzma               python             sqlite3            unlz4              xz                 zstd
+2to3-3.7           bzfgrep            conda-env          lz4c               lzmadec            python3            sqlite3_analyzer   unlzma             xzcat              zstdcat
+activate           bzgrep             cph                lz4cat             lzmainfo           python3.7          tabs               unxz               xzcmp              zstdmt
+bsdcat             bzip2              c_rehash           lzcat              lzmore             python3.7-config   tclsh              unzstd             xzdec              
+bsdcpio            bzip2recover       deactivate         lzcmp              ncursesw6-config   python3.7m         tclsh8.6           wheel              xzdiff             
+bsdtar             bzless             easy_install       lzdiff             openssl            python3.7m-config  tic                wish               xzegrep            
+bunzip2            bzmore             idle3              lzegrep            pip                python3-config     toe                wish8.6            xzfgrep            
+bzcat              captoinfo          idle3.7            lzfgrep            pydoc              pyvenv             tput               xml2-config        xzgrep             
+bzcmp              chardetect         infocmp            lzgrep             pydoc3             pyvenv-3.7         tqdm               xmlcatalog         xzless             
+bzdiff             clear              infotocap          lzless             pydoc3.7           reset              tset               xmllint            xzmore             
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dag-sc-jail.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+[2019-10-01 18:17:04,212] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=623
+[2019-10-01 18:17:04,314] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 18:17:04,504] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:17:03+00:00 [None]>
+[2019-10-01 18:17:04,511] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:17:03+00:00 [None]>
+[2019-10-01 18:17:04,511] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:17:04,511] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 18:17:04,511] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:17:04,511] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-01T18:17:03+00:00
+[2019-10-01 18:17:04,528] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 18:17:04,529] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=tutorial
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T18:17:03+00:00
+[2019-10-01 18:17:04,529] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmp2s5sbnnr/dl_population_sheetu16_kjss
+[2019-10-01 18:17:04,529] {bash_operator.py:115} INFO - Running command: /opt/miniconda/bin/conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191001-santa-clara-daily-population-sheet.pdf
+[2019-10-01 18:17:04,534] {bash_operator.py:124} INFO - Output:
+[2019-10-01 18:17:04,624] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,624] {bash_operator.py:128} INFO - CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+[2019-10-01 18:17:04,624] {bash_operator.py:128} INFO - To initialize your shell, run
+[2019-10-01 18:17:04,624] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,624] {bash_operator.py:128} INFO -     $ conda init <SHELL_NAME>
+[2019-10-01 18:17:04,624] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - Currently supported shells are:
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO -   - bash
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO -   - fish
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO -   - tcsh
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO -   - xonsh
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO -   - zsh
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO -   - powershell
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - See 'conda init --help' for more information and options.
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,625] {bash_operator.py:128} INFO - 
+[2019-10-01 18:17:04,761] {bash_operator.py:128} INFO - Traceback (most recent call last):
+[2019-10-01 18:17:04,761] {bash_operator.py:128} INFO -   File "/home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py", line 91, in <module>
+[2019-10-01 18:17:04,761] {bash_operator.py:128} INFO -     raise ValueError(f'File {args.outfile} exists. Will not overwrite.')
+[2019-10-01 18:17:04,761] {bash_operator.py:128} INFO - ValueError: File /bigdata/20191001-santa-clara-daily-population-sheet.pdf exists. Will not overwrite.
+[2019-10-01 18:17:04,772] {bash_operator.py:132} INFO - Command exited with return code 1
+[2019-10-01 18:17:04,777] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-01 18:17:04,808] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 36, in <module>
+    dag.cli()
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/dag.py", line 1247, in cli
+    args.func(args, self)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dag-sc-jail.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+[2019-10-01 18:18:27,902] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=634
+[2019-10-01 18:18:28,002] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 18:18:28,194] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:18:27+00:00 [None]>
+[2019-10-01 18:18:28,200] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:18:27+00:00 [None]>
+[2019-10-01 18:18:28,200] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:18:28,201] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 18:18:28,201] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:18:28,201] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-01T18:18:27+00:00
+[2019-10-01 18:18:28,218] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 18:18:28,219] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=tutorial
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T18:18:27+00:00
+[2019-10-01 18:18:28,219] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmp4qsa32q0/dl_population_sheetvhdyvf7y
+[2019-10-01 18:18:28,219] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191001-santa-clara-daily-population-sheet.pdf
+[2019-10-01 18:18:28,224] {bash_operator.py:124} INFO - Output:
+[2019-10-01 18:18:29,447] {bash_operator.py:128} INFO - Traceback (most recent call last):
+[2019-10-01 18:18:29,447] {bash_operator.py:128} INFO -   File "/home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py", line 91, in <module>
+[2019-10-01 18:18:29,447] {bash_operator.py:128} INFO -     raise ValueError(f'File {args.outfile} exists. Will not overwrite.')
+[2019-10-01 18:18:29,448] {bash_operator.py:128} INFO - ValueError: File /bigdata/20191001-santa-clara-daily-population-sheet.pdf exists. Will not overwrite.
+[2019-10-01 18:18:29,458] {bash_operator.py:132} INFO - Command exited with return code 1
+[2019-10-01 18:18:29,463] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-01 18:18:29,464] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 36, in <module>
+    dag.cli()
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/dag.py", line 1247, in cli
+    args.func(args, self)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@f9ed595ef8e7:~$ rm /bigdata/20191001-santa-clara-daily-population-sheet.pdf 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+[2019-10-01 18:18:57,777] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=649
+[2019-10-01 18:18:57,877] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 18:18:58,050] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:18:57+00:00 [None]>
+[2019-10-01 18:18:58,053] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: tutorial.dl_population_sheet 2019-10-01T18:18:57+00:00 [None]>
+[2019-10-01 18:18:58,053] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:18:58,054] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 18:18:58,054] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 18:18:58,054] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-01T18:18:57+00:00
+[2019-10-01 18:18:58,066] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 18:18:58,066] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=tutorial
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T18:18:57+00:00
+[2019-10-01 18:18:58,066] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmplia7uivd/dl_population_sheetx4x1vla8
+[2019-10-01 18:18:58,066] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191001-santa-clara-daily-population-sheet.pdf
+[2019-10-01 18:18:58,072] {bash_operator.py:124} INFO - Output:
+[2019-10-01 18:18:59,327] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@f9ed595ef8e7:~$ cat scripts/sc-jail-project/dag-sc-jail.py 
+#! /usr/bin/env python
+
+import airflow
+from airflow.models import DAG
+from airflow.operators.bash_operator import BashOperator
+from datetime import datetime, timedelta
+
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': airflow.utils.dates.days_ago(2),
+    'email': ['airflow@theairflower.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+    # 'queue': 'bash_queue',
+    # 'pool': 'backfill',
+    # 'priority_weight': 10,
+    # 'end_date': datetime(2016, 1, 1),
+}
+
+dag = DAG('tutorial',
+          default_args=default_args,
+          schedule_interval='0 7 * * *',
+          dagrun_timeout=timedelta(minutes=5),
+          params={'retries': 3})
+
+dl_task = BashOperator(
+    task_id='dl_population_sheet',
+    bash_command='source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.pdf',
+    dag=dag,
+)
+
+if __name__ == "__main__":
+    dag.cli()
+
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dag-sc-jail.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py list_tasks
+[2019-10-01 20:39:12,315] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=931
+[2019-10-01 20:39:12,413] {__init__.py:51} INFO - Using executor LocalExecutor
+dl_population_sheet
+sheet_to_text
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/dag-sc-jail.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py list_tasks
+[2019-10-01 20:39:57,301] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=935
+[2019-10-01 20:39:57,399] {__init__.py:51} INFO - Using executor LocalExecutor
+dl_population_sheet
+sheet_to_text
+(airflow-project) airflow@f9ed595ef8e7:~$ rm /bigdata/20191001-santa-clara-daily-population-sheet.pdf 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+[2019-10-01 20:40:27,258] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=939
+[2019-10-01 20:40:27,357] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 20:40:28,050] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.dl_population_sheet 2019-10-01T20:40:26+00:00 [None]>
+[2019-10-01 20:40:28,055] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.dl_population_sheet 2019-10-01T20:40:26+00:00 [None]>
+[2019-10-01 20:40:28,055] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:40:28,055] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 20:40:28,055] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:40:28,056] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-01T20:40:26+00:00
+[2019-10-01 20:40:28,068] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 20:40:28,069] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-project
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T20:40:26+00:00
+[2019-10-01 20:40:28,069] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpd9oo3x3a/dl_population_sheetechmnvat
+[2019-10-01 20:40:28,069] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191001-santa-clara-daily-population-sheet.pdf
+[2019-10-01 20:40:28,076] {bash_operator.py:124} INFO - Output:
+[2019-10-01 20:40:29,848] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+[2019-10-01 20:41:11,974] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=953
+[2019-10-01 20:41:12,073] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 20:41:12,268] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:41:11+00:00 [None]>
+[2019-10-01 20:41:12,275] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:41:11+00:00 [None]>
+[2019-10-01 20:41:12,275] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:41:12,275] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 20:41:12,276] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:41:12,276] {taskinstance.py:859} INFO - Executing <Task(BashOperator): sheet_to_text> on 2019-10-01T20:41:11+00:00
+[2019-10-01 20:41:12,294] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 20:41:12,295] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-project
+AIRFLOW_CTX_TASK_ID=sheet_to_text
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T20:41:11+00:00
+[2019-10-01 20:41:12,295] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpvggkk58w/sheet_to_textug41dpq_
+[2019-10-01 20:41:12,295] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py     -i /bigdata/20191001-santa-clara-daily-population-sheet.pdf     -o /bigdata/20191001-santa-clara-daily-population-sheet.txt     --keep-infile     --keep-imagefile
+[2019-10-01 20:41:12,301] {bash_operator.py:124} INFO - Output:
+[2019-10-01 20:41:12,504] {bash_operator.py:128} INFO - /tmp/airflowtmpvggkk58w/sheet_to_textug41dpq_: line 1: /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py: No such file or directory
+[2019-10-01 20:41:12,504] {bash_operator.py:132} INFO - Command exited with return code 127
+[2019-10-01 20:41:12,509] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-01 20:41:12,510] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 49, in <module>
+    dag.cli()
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/dag.py", line 1247, in cli
+    args.func(args, self)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/convert-dpcs-to-text.py
+(airflow-project) airflow@f9ed595ef8e7:~$ sudo apt-get install poppler_utils
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package poppler_utils
+(airflow-project) airflow@f9ed595ef8e7:~$ sudo apt-get install poppler-utils
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  libcairo2 libcurl3-gnutls libjbig0 libldap-2.4-2 libldap-common libnghttp2-14 libopenjp2-7 libpixman-1-0 libpoppler82 librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db libssh2-1 libtiff5
+  libwebp6 libxcb-render0 libxcb-shm0 poppler-data
+Suggested packages:
+  libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql ghostscript fonts-japanese-mincho | fonts-ipafont-mincho
+  fonts-japanese-gothic | fonts-ipafont-gothic fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+The following NEW packages will be installed:
+  libcairo2 libcurl3-gnutls libjbig0 libldap-2.4-2 libldap-common libnghttp2-14 libopenjp2-7 libpixman-1-0 libpoppler82 librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db libssh2-1 libtiff5
+  libwebp6 libxcb-render0 libxcb-shm0 poppler-data poppler-utils
+0 upgraded, 20 newly installed, 0 to remove and 4 not upgraded.
+Need to get 6,514 kB of archives.
+After this operation, 23.9 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://cdn-fastly.deb.debian.org/debian buster/main amd64 poppler-data all 0.4.9-2 [1,473 kB]
+Get:2 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libpixman-1-0 amd64 0.36.0-1 [537 kB]
+Get:20 http://security-cdn.debian.org/debian-security buster/updates/main amd64 libnghttp2-14 amd64 1.36.0-2+deb10u1 [85.0 kB]
+Get:3 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libxcb-render0 amd64 1.13.1-2 [109 kB]
+Get:4 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libxcb-shm0 amd64 1.13.1-2 [99.2 kB]
+Get:5 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libcairo2 amd64 1.16.0-4 [689 kB]
+Get:6 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libsasl2-modules-db amd64 2.1.27+dfsg-1 [69.0 kB]
+Get:7 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libsasl2-2 amd64 2.1.27+dfsg-1 [106 kB]
+Get:8 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libldap-common all 2.4.47+dfsg-3+deb10u1 [89.6 kB]
+Get:9 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libldap-2.4-2 amd64 2.4.47+dfsg-3+deb10u1 [225 kB]
+Get:10 http://cdn-fastly.deb.debian.org/debian buster/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2 [60.5 kB]
+Get:11 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libssh2-1 amd64 1.8.0-2.1 [140 kB]
+Get:12 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libcurl3-gnutls amd64 7.64.0-4 [329 kB]
+Get:13 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libjbig0 amd64 2.1-3.1+b2 [31.0 kB]
+Get:14 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libopenjp2-7 amd64 2.3.0-2 [158 kB]
+Get:15 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libwebp6 amd64 0.6.1-2 [263 kB]
+Get:16 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libtiff5 amd64 4.0.10-4 [257 kB]
+Get:17 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libpoppler82 amd64 0.71.0-5 [1,507 kB]
+Get:18 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libsasl2-modules amd64 2.1.27+dfsg-1 [104 kB]
+Get:19 http://cdn-fastly.deb.debian.org/debian buster/main amd64 poppler-utils amd64 0.71.0-5 [184 kB]
+Fetched 6,514 kB in 3s (2,589 kB/s)   
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76, <> line 20.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.28.1 /usr/local/share/perl/5.28.1 /usr/lib/x86_64-linux-gnu/perl5/5.28 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.28 /usr/share/perl/5.28 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 20.)
+debconf: falling back to frontend: Teletype
+Selecting previously unselected package poppler-data.
+(Reading database ... 15525 files and directories currently installed.)
+Preparing to unpack .../00-poppler-data_0.4.9-2_all.deb ...
+Unpacking poppler-data (0.4.9-2) ...
+Selecting previously unselected package libpixman-1-0:amd64.
+Preparing to unpack .../01-libpixman-1-0_0.36.0-1_amd64.deb ...
+Unpacking libpixman-1-0:amd64 (0.36.0-1) ...
+Selecting previously unselected package libxcb-render0:amd64.
+Preparing to unpack .../02-libxcb-render0_1.13.1-2_amd64.deb ...
+Unpacking libxcb-render0:amd64 (1.13.1-2) ...
+Selecting previously unselected package libxcb-shm0:amd64.
+Preparing to unpack .../03-libxcb-shm0_1.13.1-2_amd64.deb ...
+Unpacking libxcb-shm0:amd64 (1.13.1-2) ...
+Selecting previously unselected package libcairo2:amd64.
+Preparing to unpack .../04-libcairo2_1.16.0-4_amd64.deb ...
+Unpacking libcairo2:amd64 (1.16.0-4) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../05-libsasl2-modules-db_2.1.27+dfsg-1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.27+dfsg-1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../06-libsasl2-2_2.1.27+dfsg-1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.27+dfsg-1) ...
+Selecting previously unselected package libldap-common.
+Preparing to unpack .../07-libldap-common_2.4.47+dfsg-3+deb10u1_all.deb ...
+Unpacking libldap-common (2.4.47+dfsg-3+deb10u1) ...
+Selecting previously unselected package libldap-2.4-2:amd64.
+Preparing to unpack .../08-libldap-2.4-2_2.4.47+dfsg-3+deb10u1_amd64.deb ...
+Unpacking libldap-2.4-2:amd64 (2.4.47+dfsg-3+deb10u1) ...
+Selecting previously unselected package libnghttp2-14:amd64.
+Preparing to unpack .../09-libnghttp2-14_1.36.0-2+deb10u1_amd64.deb ...
+Unpacking libnghttp2-14:amd64 (1.36.0-2+deb10u1) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../10-librtmp1_2.4+20151223.gitfa8646d.1-2_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2) ...
+Selecting previously unselected package libssh2-1:amd64.
+Preparing to unpack .../11-libssh2-1_1.8.0-2.1_amd64.deb ...
+Unpacking libssh2-1:amd64 (1.8.0-2.1) ...
+Selecting previously unselected package libcurl3-gnutls:amd64.
+Preparing to unpack .../12-libcurl3-gnutls_7.64.0-4_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.64.0-4) ...
+Selecting previously unselected package libjbig0:amd64.
+Preparing to unpack .../13-libjbig0_2.1-3.1+b2_amd64.deb ...
+Unpacking libjbig0:amd64 (2.1-3.1+b2) ...
+Selecting previously unselected package libopenjp2-7:amd64.
+Preparing to unpack .../14-libopenjp2-7_2.3.0-2_amd64.deb ...
+Unpacking libopenjp2-7:amd64 (2.3.0-2) ...
+Selecting previously unselected package libwebp6:amd64.
+Preparing to unpack .../15-libwebp6_0.6.1-2_amd64.deb ...
+Unpacking libwebp6:amd64 (0.6.1-2) ...
+Selecting previously unselected package libtiff5:amd64.
+Preparing to unpack .../16-libtiff5_4.0.10-4_amd64.deb ...
+Unpacking libtiff5:amd64 (4.0.10-4) ...
+Selecting previously unselected package libpoppler82:amd64.
+Preparing to unpack .../17-libpoppler82_0.71.0-5_amd64.deb ...
+Unpacking libpoppler82:amd64 (0.71.0-5) ...
+Selecting previously unselected package libsasl2-modules:amd64.
+Preparing to unpack .../18-libsasl2-modules_2.1.27+dfsg-1_amd64.deb ...
+Unpacking libsasl2-modules:amd64 (2.1.27+dfsg-1) ...
+Selecting previously unselected package poppler-utils.
+Preparing to unpack .../19-poppler-utils_0.71.0-5_amd64.deb ...
+Unpacking poppler-utils (0.71.0-5) ...
+Setting up libpixman-1-0:amd64 (0.36.0-1) ...
+Setting up libxcb-render0:amd64 (1.13.1-2) ...
+Setting up libsasl2-modules:amd64 (2.1.27+dfsg-1) ...
+Setting up libnghttp2-14:amd64 (1.36.0-2+deb10u1) ...
+Setting up libxcb-shm0:amd64 (1.13.1-2) ...
+Setting up libldap-common (2.4.47+dfsg-3+deb10u1) ...
+Setting up libjbig0:amd64 (2.1-3.1+b2) ...
+Setting up libcairo2:amd64 (1.16.0-4) ...
+Setting up poppler-data (0.4.9-2) ...
+Setting up libsasl2-modules-db:amd64 (2.1.27+dfsg-1) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2) ...
+Setting up libwebp6:amd64 (0.6.1-2) ...
+Setting up libsasl2-2:amd64 (2.1.27+dfsg-1) ...
+Setting up libopenjp2-7:amd64 (2.3.0-2) ...
+Setting up libssh2-1:amd64 (1.8.0-2.1) ...
+Setting up libtiff5:amd64 (4.0.10-4) ...
+Setting up libldap-2.4-2:amd64 (2.4.47+dfsg-3+deb10u1) ...
+Setting up libcurl3-gnutls:amd64 (7.64.0-4) ...
+Setting up libpoppler82:amd64 (0.71.0-5) ...
+Setting up poppler-utils (0.71.0-5) ...
+Processing triggers for libc-bin (2.28-10) ...
+(airflow-project) airflow@f9ed595ef8e7:~$ sudo apt-get install tesseract
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package tesseract
+(airflow-project) airflow@f9ed595ef8e7:~$ sudo apt-get install tesseract-ocr
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  fontconfig libdatrie1 libfribidi0 libgif7 libgraphite2-3 libharfbuzz0b liblept5 libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0 libtesseract4 libthai-data libthai0 tesseract-ocr-eng
+  tesseract-ocr-osd
+The following NEW packages will be installed:
+  fontconfig libdatrie1 libfribidi0 libgif7 libgraphite2-3 libharfbuzz0b liblept5 libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0 libtesseract4 libthai-data libthai0 tesseract-ocr tesseract-ocr-eng
+  tesseract-ocr-osd
+0 upgraded, 16 newly installed, 0 to remove and 4 not upgraded.
+Need to get 9,371 kB of archives.
+After this operation, 26.4 MB of additional disk space will be used.
+Do you want to continue? [Y/n] 
+Get:1 http://cdn-fastly.deb.debian.org/debian buster/main amd64 fontconfig amd64 2.13.1-2 [405 kB]
+Get:2 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libdatrie1 amd64 0.2.12-2 [39.3 kB]
+Get:3 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libfribidi0 amd64 1.0.5-3.1 [63.5 kB]
+Get:4 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libgif7 amd64 5.1.4-3 [43.3 kB]
+Get:5 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libgraphite2-3 amd64 1.3.13-7 [80.7 kB]
+Get:6 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libharfbuzz0b amd64 2.3.1-1 [1,187 kB]
+Get:7 http://cdn-fastly.deb.debian.org/debian buster/main amd64 liblept5 amd64 1.76.0-1 [940 kB]
+Get:8 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libthai-data all 0.1.28-2 [170 kB]
+Get:9 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libthai0 amd64 0.1.28-2 [54.1 kB]
+Get:10 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libpango-1.0-0 amd64 1.42.4-7~deb10u1 [186 kB]
+Get:11 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libpangoft2-1.0-0 amd64 1.42.4-7~deb10u1 [67.9 kB]
+Get:12 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libpangocairo-1.0-0 amd64 1.42.4-7~deb10u1 [55.5 kB]
+Get:13 http://cdn-fastly.deb.debian.org/debian buster/main amd64 libtesseract4 amd64 4.0.0-2 [1,234 kB]
+Get:14 http://cdn-fastly.deb.debian.org/debian buster/main amd64 tesseract-ocr-eng all 1:4.00~git30-7274cfa-1 [1,592 kB]
+Get:15 http://cdn-fastly.deb.debian.org/debian buster/main amd64 tesseract-ocr-osd all 1:4.00~git30-7274cfa-1 [2,991 kB]
+Get:16 http://cdn-fastly.deb.debian.org/debian buster/main amd64 tesseract-ocr amd64 4.0.0-2 [262 kB]
+Fetched 9,371 kB in 3s (2,953 kB/s)     
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76, <> line 16.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.28.1 /usr/local/share/perl/5.28.1 /usr/lib/x86_64-linux-gnu/perl5/5.28 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.28 /usr/share/perl/5.28 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 16.)
+debconf: falling back to frontend: Teletype
+Selecting previously unselected package fontconfig.
+(Reading database ... 16226 files and directories currently installed.)
+Preparing to unpack .../00-fontconfig_2.13.1-2_amd64.deb ...
+Unpacking fontconfig (2.13.1-2) ...
+Selecting previously unselected package libdatrie1:amd64.
+Preparing to unpack .../01-libdatrie1_0.2.12-2_amd64.deb ...
+Unpacking libdatrie1:amd64 (0.2.12-2) ...
+Selecting previously unselected package libfribidi0:amd64.
+Preparing to unpack .../02-libfribidi0_1.0.5-3.1_amd64.deb ...
+Unpacking libfribidi0:amd64 (1.0.5-3.1) ...
+Selecting previously unselected package libgif7:amd64.
+Preparing to unpack .../03-libgif7_5.1.4-3_amd64.deb ...
+Unpacking libgif7:amd64 (5.1.4-3) ...
+Selecting previously unselected package libgraphite2-3:amd64.
+Preparing to unpack .../04-libgraphite2-3_1.3.13-7_amd64.deb ...
+Unpacking libgraphite2-3:amd64 (1.3.13-7) ...
+Selecting previously unselected package libharfbuzz0b:amd64.
+Preparing to unpack .../05-libharfbuzz0b_2.3.1-1_amd64.deb ...
+Unpacking libharfbuzz0b:amd64 (2.3.1-1) ...
+Selecting previously unselected package liblept5.
+Preparing to unpack .../06-liblept5_1.76.0-1_amd64.deb ...
+Unpacking liblept5 (1.76.0-1) ...
+Selecting previously unselected package libthai-data.
+Preparing to unpack .../07-libthai-data_0.1.28-2_all.deb ...
+Unpacking libthai-data (0.1.28-2) ...
+Selecting previously unselected package libthai0:amd64.
+Preparing to unpack .../08-libthai0_0.1.28-2_amd64.deb ...
+Unpacking libthai0:amd64 (0.1.28-2) ...
+Selecting previously unselected package libpango-1.0-0:amd64.
+Preparing to unpack .../09-libpango-1.0-0_1.42.4-7~deb10u1_amd64.deb ...
+Unpacking libpango-1.0-0:amd64 (1.42.4-7~deb10u1) ...
+Selecting previously unselected package libpangoft2-1.0-0:amd64.
+Preparing to unpack .../10-libpangoft2-1.0-0_1.42.4-7~deb10u1_amd64.deb ...
+Unpacking libpangoft2-1.0-0:amd64 (1.42.4-7~deb10u1) ...
+Selecting previously unselected package libpangocairo-1.0-0:amd64.
+Preparing to unpack .../11-libpangocairo-1.0-0_1.42.4-7~deb10u1_amd64.deb ...
+Unpacking libpangocairo-1.0-0:amd64 (1.42.4-7~deb10u1) ...
+Selecting previously unselected package libtesseract4:amd64.
+Preparing to unpack .../12-libtesseract4_4.0.0-2_amd64.deb ...
+Unpacking libtesseract4:amd64 (4.0.0-2) ...
+Selecting previously unselected package tesseract-ocr-eng.
+Preparing to unpack .../13-tesseract-ocr-eng_1%3a4.00~git30-7274cfa-1_all.deb ...
+Unpacking tesseract-ocr-eng (1:4.00~git30-7274cfa-1) ...
+Selecting previously unselected package tesseract-ocr-osd.
+Preparing to unpack .../14-tesseract-ocr-osd_1%3a4.00~git30-7274cfa-1_all.deb ...
+Unpacking tesseract-ocr-osd (1:4.00~git30-7274cfa-1) ...
+Selecting previously unselected package tesseract-ocr.
+Preparing to unpack .../15-tesseract-ocr_4.0.0-2_amd64.deb ...
+Unpacking tesseract-ocr (4.0.0-2) ...
+Setting up libgraphite2-3:amd64 (1.3.13-7) ...
+Setting up fontconfig (2.13.1-2) ...
+Regenerating fonts cache... done.
+Setting up libdatrie1:amd64 (0.2.12-2) ...
+Setting up tesseract-ocr-eng (1:4.00~git30-7274cfa-1) ...
+Setting up libfribidi0:amd64 (1.0.5-3.1) ...
+Setting up libgif7:amd64 (5.1.4-3) ...
+Setting up libharfbuzz0b:amd64 (2.3.1-1) ...
+Setting up libthai-data (0.1.28-2) ...
+Setting up tesseract-ocr-osd (1:4.00~git30-7274cfa-1) ...
+Setting up liblept5 (1.76.0-1) ...
+Setting up libthai0:amd64 (0.1.28-2) ...
+Setting up libtesseract4:amd64 (4.0.0-2) ...
+Setting up libpango-1.0-0:amd64 (1.42.4-7~deb10u1) ...
+Setting up libpangoft2-1.0-0:amd64 (1.42.4-7~deb10u1) ...
+Setting up libpangocairo-1.0-0:amd64 (1.42.4-7~deb10u1) ...
+Setting up tesseract-ocr (4.0.0-2) ...
+Processing triggers for libc-bin (2.28-10) ...
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+[2019-10-01 20:45:05,665] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1380
+[2019-10-01 20:45:05,763] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 20:45:05,954] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:45:05+00:00 [None]>
+[2019-10-01 20:45:05,962] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:45:05+00:00 [None]>
+[2019-10-01 20:45:05,962] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:45:05,962] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 20:45:05,963] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:45:05,963] {taskinstance.py:859} INFO - Executing <Task(BashOperator): sheet_to_text> on 2019-10-01T20:45:05+00:00
+[2019-10-01 20:45:05,988] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 20:45:05,988] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-project
+AIRFLOW_CTX_TASK_ID=sheet_to_text
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T20:45:05+00:00
+[2019-10-01 20:45:05,989] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpukc7g9bx/sheet_to_text4wwa87_m
+[2019-10-01 20:45:05,989] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py     -i /bigdata/20191001-santa-clara-daily-population-sheet.pdf     -o /bigdata/20191001-santa-clara-daily-population-sheet.txt     --keep-infile     --keep-imagefile
+[2019-10-01 20:45:05,993] {bash_operator.py:124} INFO - Output:
+[2019-10-01 20:45:06,210] {bash_operator.py:128} INFO - /tmp/airflowtmpukc7g9bx/sheet_to_text4wwa87_m: line 1: /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py: Permission denied
+[2019-10-01 20:45:06,210] {bash_operator.py:132} INFO - Command exited with return code 126
+[2019-10-01 20:45:06,214] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-01 20:45:06,215] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 49, in <module>
+    dag.cli()
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/dag.py", line 1247, in cli
+    args.func(args, self)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@f9ed595ef8e7:~$ chmod 755 scripts/sc-jail-project/
+convert-dpcs-to-text.py  dag-sc-jail.py           dl-santa-clara-dpcs.py   
+(airflow-project) airflow@f9ed595ef8e7:~$ chmod 755 scripts/sc-jail-project/convert-dpcs-to-text.py 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+[2019-10-01 20:45:50,952] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1395
+[2019-10-01 20:45:51,051] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 20:45:51,235] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:45:50+00:00 [None]>
+[2019-10-01 20:45:51,239] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:45:50+00:00 [None]>
+[2019-10-01 20:45:51,239] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:45:51,239] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 20:45:51,239] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:45:51,239] {taskinstance.py:859} INFO - Executing <Task(BashOperator): sheet_to_text> on 2019-10-01T20:45:50+00:00
+[2019-10-01 20:45:51,251] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 20:45:51,251] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-project
+AIRFLOW_CTX_TASK_ID=sheet_to_text
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T20:45:50+00:00
+[2019-10-01 20:45:51,252] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpsxksux87/sheet_to_textpqzroo49
+[2019-10-01 20:45:51,252] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py     -i /bigdata/20191001-santa-clara-daily-population-sheet.pdf     -o /bigdata/20191001-santa-clara-daily-population-sheet.txt     --keep-infile     --keep-imagefile
+[2019-10-01 20:45:51,262] {bash_operator.py:124} INFO - Output:
+[2019-10-01 20:45:52,278] {bash_operator.py:128} INFO - Traceback (most recent call last):
+[2019-10-01 20:45:52,279] {bash_operator.py:128} INFO -   File "/home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py", line 77, in <module>
+[2019-10-01 20:45:52,279] {bash_operator.py:128} INFO -     pathlib.Path(text_file).rename(args.outfile)
+[2019-10-01 20:45:52,279] {bash_operator.py:128} INFO -   File "/opt/miniconda/envs/sc-jail-project/lib/python3.7/pathlib.py", line 1312, in rename
+[2019-10-01 20:45:52,279] {bash_operator.py:128} INFO -     self._accessor.rename(self, target)
+[2019-10-01 20:45:52,279] {bash_operator.py:128} INFO - OSError: [Errno 18] Invalid cross-device link: '/tmp/tmpkb3tzohx/20191001-santa-clara-daily-population-sheet.txt' -> '/bigdata/20191001-santa-clara-daily-population-sheet.txt'
+[2019-10-01 20:45:52,283] {bash_operator.py:132} INFO - Command exited with return code 1
+[2019-10-01 20:45:52,287] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-01 20:45:52,288] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 49, in <module>
+    dag.cli()
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/dag.py", line 1247, in cli
+    args.func(args, self)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/convert-dpcs-to-text.py
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+[2019-10-01 20:49:47,532] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1422
+[2019-10-01 20:49:47,630] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 20:49:47,820] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:49:47+00:00 [None]>
+[2019-10-01 20:49:47,827] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:49:47+00:00 [None]>
+[2019-10-01 20:49:47,828] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:49:47,828] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 20:49:47,828] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:49:47,828] {taskinstance.py:859} INFO - Executing <Task(BashOperator): sheet_to_text> on 2019-10-01T20:49:47+00:00
+[2019-10-01 20:49:47,850] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 20:49:47,851] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-project
+AIRFLOW_CTX_TASK_ID=sheet_to_text
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T20:49:47+00:00
+[2019-10-01 20:49:47,851] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpiawdgpcx/sheet_to_textd5eopmem
+[2019-10-01 20:49:47,851] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py     -i /bigdata/20191001-santa-clara-daily-population-sheet.pdf     -o /bigdata/20191001-santa-clara-daily-population-sheet.txt     --keep-infile     --keep-imagefile
+[2019-10-01 20:49:47,855] {bash_operator.py:124} INFO - Output:
+[2019-10-01 20:49:48,591] {bash_operator.py:128} INFO - Traceback (most recent call last):
+[2019-10-01 20:49:48,591] {bash_operator.py:128} INFO -   File "/home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py", line 85, in <module>
+[2019-10-01 20:49:48,591] {bash_operator.py:128} INFO -     pathlib.Path(image_file).rename(f'{p}/{pathlib.PurePath(image_file).name}')
+[2019-10-01 20:49:48,592] {bash_operator.py:128} INFO -   File "/opt/miniconda/envs/sc-jail-project/lib/python3.7/pathlib.py", line 1312, in rename
+[2019-10-01 20:49:48,592] {bash_operator.py:128} INFO -     self._accessor.rename(self, target)
+[2019-10-01 20:49:48,592] {bash_operator.py:128} INFO - OSError: [Errno 18] Invalid cross-device link: '/tmp/tmpx6md_nwl/20191001-santa-clara-daily-population-sheet.tif' -> '/bigdata/20191001-santa-clara-daily-population-sheet.tif'
+[2019-10-01 20:49:48,595] {bash_operator.py:132} INFO - Command exited with return code 1
+[2019-10-01 20:49:48,599] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-01 20:49:48,600] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "scripts/sc-jail-project/dag-sc-jail.py", line 49, in <module>
+    dag.cli()
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/dag.py", line 1247, in cli
+    args.func(args, self)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@f9ed595ef8e7:~$ vim scripts/sc-jail-project/convert-dpcs-to-text.py
+(airflow-project) airflow@f9ed595ef8e7:~$ ls -l /bigdata/
+total 116
+-rw-r--r-- 1 airflow airflow 114550 Oct  1 20:40 20191001-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow    657 Oct  1 20:49 20191001-santa-clara-daily-population-sheet.txt
+(airflow-project) airflow@f9ed595ef8e7:~$ rm /bigdata/20191001-santa-clara-daily-population-sheet.txt 
+(airflow-project) airflow@f9ed595ef8e7:~$ scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+[2019-10-01 20:53:17,627] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1449
+[2019-10-01 20:53:17,726] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-01 20:53:17,907] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:53:17+00:00 [None]>
+[2019-10-01 20:53:17,910] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-project.sheet_to_text 2019-10-01T20:53:17+00:00 [None]>
+[2019-10-01 20:53:17,910] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:53:17,911] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-01 20:53:17,911] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-01 20:53:17,911] {taskinstance.py:859} INFO - Executing <Task(BashOperator): sheet_to_text> on 2019-10-01T20:53:17+00:00
+[2019-10-01 20:53:17,923] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-01 20:53:17,923] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-project
+AIRFLOW_CTX_TASK_ID=sheet_to_text
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-01T20:53:17+00:00
+[2019-10-01 20:53:17,923] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmp274j5nw1/sheet_to_text406awd8e
+[2019-10-01 20:53:17,923] {bash_operator.py:115} INFO - Running command: source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py     -i /bigdata/20191001-santa-clara-daily-population-sheet.pdf     -o /bigdata/20191001-santa-clara-daily-population-sheet.txt     --keep-infile     --keep-imagefile
+[2019-10-01 20:53:17,934] {bash_operator.py:124} INFO - Output:
+[2019-10-01 20:53:18,669] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@f9ed595ef8e7:~$ ls -ltr /bigdata/
+total 6292
+-rw-r--r-- 1 airflow airflow  114550 Oct  1 20:40 20191001-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow 6321888 Oct  1 20:53 20191001-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 airflow airflow     657 Oct  1 20:53 20191001-santa-clara-daily-population-sheet.txt
+(airflow-project) airflow@f9ed595ef8e7:~$ more /bigdata/20191001-santa-clara-daily-population-sheet.txt 
+Office of the Sheriff
+Department of Correction
+Daily Jail Population Statistics
+
+Tuesday, October 1, 2019 as of 5:00am
+
+Laurie Smith, Sheriff
+
+ 
+
+Total Jail Population: 3,399 Total Jail Population by Facility:
+(Includes Intake Booking)
+
+Men: 2,916 Elmwood: 2,717
+
+Women: 465 Main Jail: 664
+Average Length of Stay: (ALS) 181
+
+Men Length of Stay Women Length of Stay
+(Days) (Days)
+
+Felony Sentenced: 466 16 % 223 96 20% 159
+Misdemeanor Sentenced: 126 4% 63 23 5% 41
+Felony Unsentenced: 1,968 67 % 219 271 58% 119
+Misdemeanor Unsentenced: 369 12% 49 80 17% 45
+
+AGE Profile
+<18: 0 0%
+18-24: 527 16 %
+25-34: 1164 34%
+35-44: 934 27%
+45-54: 505 15 %
+
+55+: 269 8%
+^L
+(airflow-project) airflow@f9ed595ef8e7:~$ history
+    1  ls -l /opt/spark-2.4.4-bin-hadoop2.7/bin/
+    2  /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit --master spark://sparkmaster:7077 /opt/spark-2.4.4-bin-hadoop2.7/examples/src/main/python/pi.py 
+    3  ls -l /bigdata/
+    4  ls -ld /bigdata
+    5  touch bigdata/test.txt
+    6  touch /bigdata/test.txt
+    7  ls -l /bigdata/
+    8  rm /bigdata/test.txt 
+    9  conda env list
+   10  mkdir -p scripts/sc-jail-project
+   11  touch scripts/sc-jail-project/dl-santa-claradpcs.py
+   12  sudo apt-get install vim
+   13  vim scripts/sc-jail-project/dl-santa-claradpcs.py
+   14  conda env list
+   15  conda activate sc-jail-project
+   16  mv scripts/sc-jail-project/dl-santa-claradpcs.py scripts/sc-jail-project/dag-sc-jail.py
+   17  chmod 77 scripts/sc-jail-project/*.py
+   18  ls -l scripts/sc-jail-project/
+   19  vim scripts/sc-jail-project/dl-santa-clara-dpcs.py
+   20  chmod 777 scripts/sc-jail-project/*.py
+   21  scripts/sc-jail-project/dag-sc-jail.py test
+   22  conda activate airflow-project
+   23  scripts/sc-jail-project/dag-sc-jail.py test
+   24  scripts/sc-jail-project/dag-sc-jail.py 
+   25  scripts/sc-jail-project/dag-sc-jail.py list_tasks
+   26  vim scripts/sc-jail-project/dag-sc-jail.py 
+   27  scripts/sc-jail-project/dag-sc-jail.py list_tasks
+   28  scripts/sc-jail-project/dag-sc-jail.py test
+   29  scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+   30  ls -l /bigdata/
+   31  vim scripts/sc-jail-project/dag-sc-jail.py 
+   32  rm /bigdata/20191001-santa-clara-daily-population-sheet.pdf 
+   33  scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+   34  which conda
+   35  vim scripts/sc-jail-project/dag-sc-jail.py 
+   36  scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+   37  vim scripts/sc-jail-project/dag-sc-jail.py 
+   38  scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+   39  rm /bigdata/20191001-santa-clara-daily-population-sheet.pdf 
+   40  scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+   41  cat scripts/sc-jail-project/dag-sc-jail.py 
+   42  vim scripts/sc-jail-project/dag-sc-jail.py 
+   43  scripts/sc-jail-project/dag-sc-jail.py list_tasks
+   44  vim scripts/sc-jail-project/dag-sc-jail.py 
+   45  scripts/sc-jail-project/dag-sc-jail.py list_tasks
+   46  rm /bigdata/20191001-santa-clara-daily-population-sheet.pdf 
+   47  scripts/sc-jail-project/dag-sc-jail.py test dl_population_sheet $(date --iso-8601=s)
+   48  scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+   49  vim scripts/sc-jail-project/convert-dpcs-to-text.py
+   50  sudo apt-get install poppler_utils
+   51  sudo apt-get install poppler-utils
+   52  sudo apt-get install tesseract
+   53  sudo apt-get install tesseract-ocr
+   54  scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+   55  chmod 755 scripts/sc-jail-project/convert-dpcs-to-text.py 
+   56  scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+   57  vim scripts/sc-jail-project/convert-dpcs-to-text.py
+   58  scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+   59  vim scripts/sc-jail-project/convert-dpcs-to-text.py
+   60  ls -l /bigdata/
+   61  rm /bigdata/20191001-santa-clara-daily-population-sheet.txt 
+   62  scripts/sc-jail-project/dag-sc-jail.py test sheet_to_text $(date --iso-8601=s)
+   63  ls -ltr /bigdata/
+   64  more /bigdata/20191001-santa-clara-daily-population-sheet.txt 
+   65  history
+(airflow-project) airflow@f9ed595ef8e7:~$ 
