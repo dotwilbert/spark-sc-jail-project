@@ -35,7 +35,8 @@ dl_task = BashOperator(
 
 sheet_to_text_task = BashOperator(
     task_id='sheet_to_text',
-    bash_command='source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
+    bash_command='source /home/airflow/.bashrc; conda activate sc-jail-project; \
+    /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
     -i /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.pdf \
     -o /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.txt \
     --keep-infile \
@@ -44,6 +45,17 @@ sheet_to_text_task = BashOperator(
 )
 
 dl_task >> sheet_to_text_task
+
+load_with_spark_task = BashOperator(
+    task_id='load_with_spark',
+    bash_command="source /home/airflow/.bashrc; conda activate sc-jail-project; \
+    /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit \
+    --master spark://sparkmaster:7077 scripts/sc-jail-project/load-dpcs.py \
+    -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
+    --archive-infile"
+)
+
+dl_task >> sheet_to_text_task >> load_with_spark_task
 
 if __name__ == "__main__":
     dag.cli()
