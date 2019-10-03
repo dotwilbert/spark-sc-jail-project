@@ -63,6 +63,7 @@ load_with_spark_task = BashOperator(
     --master spark://sparkmaster:7077 /home/airflow/scripts/sc-jail-project/load-dpcs.py \
     -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
     --archive-infile",
+    xcom_push=True,
     dag=dag
 )
 

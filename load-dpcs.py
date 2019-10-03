@@ -4,6 +4,7 @@ import argparse
 import operator
 import pathlib
 import re
+import uuid
 from datetime import datetime
 from glob import glob
 from typing import List
@@ -11,9 +12,13 @@ from typing import List
 import pytz
 
 import Levenshtein
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, DataFrameWriter
 from pyspark.sql.types import *
 
+
+class Configuration:
+    load_id=str(uuid.uuid4())
+    load_date=pytz.timezone('America/Los_Angeles').localize(datetime.now()).strftime('%Y-%m-%dT%H:%M:%S%z')
 
 class SCDailyJailPopulationReport:
     line_expectations = {
@@ -150,6 +155,8 @@ def process_file(file: str):
     sc_dpcs = SCDailyJailPopulationReport(file)
     sc_dpcs.process()
     r = []
+    r.append(Configuration.load_id)
+    r.append(Configuration.load_date)
     for field in ['report_date',
                   'sheriff',
                   'size_population_total',
@@ -184,7 +191,6 @@ if __name__ == "__main__":
         .builder \
         .appName('ETL sc-jail-project') \
         .getOrCreate()
-
     files = glob(args.glob)
     # TODO
     # implement a function to validateFileList(files). Should signal if
@@ -197,7 +203,9 @@ if __name__ == "__main__":
     df = spark.sparkContext \
         .parallelize(files) \
         .flatMap(process_file) \
-        .toDF(['REPORTDATE',
+        .toDF(['LOAD_ID',
+               'LOAD_TIMESTAMP',
+               'REPORT_DATE',
                'SHERIFF',
                'COUNT_POPULATION_TOTAL',
                'COUNT_POPULATION_TOTAL_MEN',
@@ -212,6 +220,15 @@ if __name__ == "__main__":
                'COUNT_POPULATION_UNSENTENCED_MISDEMEANOR_WOMEN'])
 
     df.show()
+    loader=DataFrameWriter(df)
+    url_connect = "jdbc:postgresql://database:5432"
+    table = "staging"
+    mode = "overwrite"
+    properties = {"user":"airflow", "password":"airflow"}
+
+    loader.jdbc(url_connect, table, mode, properties)
+
+    print(f'load_id:{Configuration.load_id}')
 # >>> from pyspark.sql import SparkSession
 # >>> from glob import glob
 # >>> spark = SparkSession.builder.appName('ETL sc-jail-project').getOrCreate()
