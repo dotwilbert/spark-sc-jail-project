@@ -52,7 +52,8 @@ load_with_spark_task = BashOperator(
     /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit \
     --master spark://sparkmaster:7077 scripts/sc-jail-project/load-dpcs.py \
     -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
-    --archive-infile"
+    --archive-infile",
+    dag=dag
 )
 
 dl_task >> sheet_to_text_task >> load_with_spark_task
