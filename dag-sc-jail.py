@@ -59,7 +59,7 @@ load_with_spark_task = BashOperator(
     task_id='load_with_spark',
     bash_command="source /home/airflow/.conda_environment; conda activate sc-jail-project; \
     /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit \
-    --master spark://sparkmaster:7077 scripts/sc-jail-project/load-dpcs.py \
+    --master spark://sparkmaster:7077 /home/airflow/scripts/sc-jail-project/load-dpcs.py \
     -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
     --archive-infile",
     dag=dag
