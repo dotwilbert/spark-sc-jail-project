@@ -28,7 +28,7 @@ dag = DAG('sc-jail-daily-population-count-sheet',
           default_args=default_args,
           schedule_interval='0 14 * * *',
           user_defined_filters= {
-              'iso8601': lambda t: t.format('YYYY-MM-DD HH:mm:ssZ', formatter='alternative'),
+              'iso8601': lambda t: t.format('YYYY-MM-DDTHH:mm:ssZ', formatter='alternative'),
               'to_pacific_tz': lambda utc_iso8601: datetime.strptime(utc_iso8601, "%Y-%m-%dT%H:%M:%S%z") \
                   .astimezone(pytz.timezone('America/Los_Angeles')) \
                   .strftime('%Y%m%d') 
