@@ -221,7 +221,7 @@ if __name__ == "__main__":
 
     df.show()
     loader=DataFrameWriter(df)
-    url_connect = "jdbc:postgresql://database:5432"
+    url_connect = "jdbc:postgresql://database:5432/"
     table = "staging"
     mode = "overwrite"
     properties = {"user":"airflow", "password":"airflow"}
