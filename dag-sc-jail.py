@@ -28,14 +28,14 @@ dag = DAG('tutorial',
 
 dl_task = BashOperator(
     task_id='dl_population_sheet',
-    bash_command='source /home/airflow/.bashrc; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.pdf',
+    bash_command='source /home/airflow/.conda_environment; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.pdf',
     params={'retries': 3},
     dag=dag,
 )
 
 sheet_to_text_task = BashOperator(
     task_id='sheet_to_text',
-    bash_command='source /home/airflow/.bashrc; conda activate sc-jail-project; \
+    bash_command='source /home/airflow/.conda_environment; conda activate sc-jail-project; \
     /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
     -i /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.pdf \
     -o /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.txt \
@@ -48,7 +48,7 @@ dl_task >> sheet_to_text_task
 
 load_with_spark_task = BashOperator(
     task_id='load_with_spark',
-    bash_command="source /home/airflow/.bashrc; conda activate sc-jail-project; \
+    bash_command="source /home/airflow/.conda_environment; conda activate sc-jail-project; \
     /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit \
     --master spark://sparkmaster:7077 scripts/sc-jail-project/load-dpcs.py \
     -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
