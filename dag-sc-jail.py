@@ -20,9 +20,10 @@ default_args = {
     # 'end_date': datetime(2016, 1, 1),
 }
 
-dag = DAG('tutorial',
+# Every day schedule will run at +2/+3hrs after publication. Container in UTC, publication in Pacific
+dag = DAG('sc-jail-daily-population-count-sheet',
           default_args=default_args,
-          schedule_interval='0 7 * * *',
+          schedule_interval='0 14 * * *',
           dagrun_timeout=timedelta(minutes=5),
           )
 
