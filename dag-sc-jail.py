@@ -62,6 +62,7 @@ load_with_spark_task = BashOperator(
     /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit \
     --master spark://sparkmaster:7077 \
     --driver-class-path /usr/share/java/postgresql.jar \
+    --jars local://usr/share/java/postgresql.jar \
     /home/airflow/scripts/sc-jail-project/load-dpcs.py \
     -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
     --archive-infile",
