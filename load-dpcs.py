@@ -210,7 +210,7 @@ if __name__ == "__main__":
         .parallelize(files) \
         .flatMap(process_file) \
         .toDF(['LOAD_ID',
-               'LOAD_TIMESTAMP',
+               'LOAD_TIME',
                'REPORT_DATE',
                'SHERIFF',
                'COUNT_POPULATION_TOTAL',
