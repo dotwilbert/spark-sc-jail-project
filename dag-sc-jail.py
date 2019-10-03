@@ -28,6 +28,7 @@ dag = DAG('sc-jail-daily-population-count-sheet',
           default_args=default_args,
           schedule_interval='0 14 * * *',
           user_defined_filters= {
+              'iso8601': lambda t: t.format('YYYY-MM-DD HH:mm:ssZ', formatter='alternative'),
               'to_pacific_tz': lambda utc_iso8601: datetime.strptime(utc_iso8601, "%Y-%m-%dT%H:%M:%S%z") \
                   .astimezone(pytz.timezone('America/Los_Angeles')) \
                   .strftime('%Y%m%d') 
@@ -37,7 +38,7 @@ dag = DAG('sc-jail-daily-population-count-sheet',
 
 dl_task = BashOperator(
     task_id='dl_population_sheet',
-    bash_command='source /home/airflow/.conda_environment; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/{{ ts | to_pacific_tz }}-santa-clara-daily-population-sheet.pdf',
+    bash_command='source /home/airflow/.conda_environment; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/{{ execution_date | iso8601 | to_pacific_tz }}-santa-clara-daily-population-sheet.pdf',
     params={'retries': 3},
     dag=dag,
 )
@@ -46,8 +47,8 @@ sheet_to_text_task = BashOperator(
     task_id='sheet_to_text',
     bash_command='source /home/airflow/.conda_environment; conda activate sc-jail-project; \
     /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
-    -i /bigdata/{{ ts | to_pacific_tz }}-santa-clara-daily-population-sheet.pdf \
-    -o /bigdata/{{ ts | to_pacific_tz }}-santa-clara-daily-population-sheet.txt \
+    -i /bigdata/{{ execution_date | iso8601 | to_pacific_tz }}-santa-clara-daily-population-sheet.pdf \
+    -o /bigdata/{{ execution_date | iso8601 | to_pacific_tz }}-santa-clara-daily-population-sheet.txt \
     --keep-infile \
     --keep-imagefile',
     dag=dag
