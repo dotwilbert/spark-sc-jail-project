@@ -1,9 +1,12 @@
 #! /usr/bin/env python
 
+from datetime import datetime, timedelta
+
+import pytz
+
 import airflow
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
-from datetime import datetime, timedelta
 
 default_args = {
     'owner': 'airflow',
@@ -36,10 +39,10 @@ dl_task = BashOperator(
 
 sheet_to_text_task = BashOperator(
     task_id='sheet_to_text',
-    bash_command='source /home/airflow/.conda_environment; conda activate sc-jail-project; \
+    bash_command=f'source /home/airflow/.conda_environment; conda activate sc-jail-project; \
     /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
-    -i /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.pdf \
-    -o /bigdata/{{ ds_nodash }}-santa-clara-daily-population-sheet.txt \
+    -i /bigdata/{pytz.timezone('UTC').localize(datetime.now()).astimezone(pytz.timezone('America/Los_Angeles')).strftime('%Y%m%d')}-santa-clara-daily-population-sheet.pdf \
+    -o /bigdata/{pytz.timezone('UTC').localize(datetime.now()).astimezone(pytz.timezone('America/Los_Angeles')).strftime('%Y%m%d')}-santa-clara-daily-population-sheet.txt \
     --keep-infile \
     --keep-imagefile',
     dag=dag
