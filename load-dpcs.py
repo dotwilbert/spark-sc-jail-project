@@ -179,7 +179,13 @@ if __name__ == "__main__":
         description='Spark Job ETL sc-jail-project')
     parser.add_argument(
         '-g', '--glob', help='Process files selected with this pattern', required=True)
-
+    parser.add_argument(
+        '-s', '--schema', help='Schema in the database', required=True)
+    parser.add_argument(
+        '-u', '--user', help='User for the database', required=True)
+    parser.add_argument(
+        '-p', '--password', help='Password for the database', required=True)
+            
     cleanup_infile = parser.add_mutually_exclusive_group(required=True)
     cleanup_infile.add_argument(
         '--archive-infile', action='store_true', help="Don't clean up the input file")
@@ -220,14 +226,18 @@ if __name__ == "__main__":
                'COUNT_POPULATION_UNSENTENCED_MISDEMEANOR_WOMEN'])
 
     df.show()
-    loader=DataFrameWriter(df)
-    url_connect = "jdbc:postgresql://database:5432/"
+    url_connect = f'jdbc:postgresql://database:5432/{args.schema}'
     table = "staging"
-    mode = "overwrite"
-    properties = {"user":"airflow", "password":"airflow"}
+    mode = "append"
+    properties = {"user":args.user, "password":args.password}
 
-    loader.jdbc(url_connect, table, mode, properties)
-
+    df.write.jdbc(
+        url=url_connect,
+        table=table,
+        mode=mode,
+        properties=properties
+    )
+    
     print(f'load_id:{Configuration.load_id}')
 # >>> from pyspark.sql import SparkSession
 # >>> from glob import glob

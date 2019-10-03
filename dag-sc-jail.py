@@ -65,8 +65,10 @@ load_with_spark_task = BashOperator(
     --jars local:///usr/share/java/postgresql.jar \
     /home/airflow/scripts/sc-jail-project/load-dpcs.py \
     -g '/bigdata/*-santa-clara-daily-population-sheet.txt' \
+    -u $SC_JAIL_USER \
+    -p $SC_JAIL_PASSWORD \
+    -s $SC_JAIL_DB \
     --archive-infile",
-    xcom_push=True,
     dag=dag
 )
 
