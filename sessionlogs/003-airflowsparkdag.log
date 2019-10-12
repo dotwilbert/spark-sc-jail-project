@@ -1,0 +1,264 @@
+conda activate airflow-project
+airflow list_dags
+airflow list_tasks sc-jail-daily-population-count-sheet
+airflow test sc-jail-daily-population-count-sheet load_with_spark 2019-10-03T02:00:00
+ls -ltr /bigdata
+ls -l /bigdata
+rm /bigdata/20191003-santa-clara-daily-population-sheet.*
+airflow list_tasks sc-jail-daily-population-count-sheet
+airflow test sc-jail-daily-population-count-sheet dl_population_sheet 2019-10-03T02:00:00
+
+(base) wilbert@wilbert-serwal:~/Projects/development/spark-container$ docker-compose exec airflowspark /bin/bash
+(base) airflow@91c4a016b27b:~$ conda activate airflow-project
+(airflow-project) airflow@91c4a016b27b:~$ airflow list_dags
+[2019-10-03 06:59:04,981] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=664
+[2019-10-03 06:59:05,081] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 06:59:05,257] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+
+
+-------------------------------------------------------------------
+DAGS
+-------------------------------------------------------------------
+sc-jail-daily-population-count-sheet
+
+(airflow-project) airflow@91c4a016b27b:~$ airflow list_tasks sc-jail-daily-population-count-sheet
+[2019-10-03 06:59:24,273] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=760
+[2019-10-03 06:59:24,372] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 06:59:25,263] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+dl_population_sheet
+load_with_spark
+sheet_to_text
+(airflow-project) airflow@91c4a016b27b:~$ airflow test sc-jail-daily-population-count-sheet dl_population_sheet 2019-10-03T02:00:00
+[2019-10-03 06:59:37,986] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=830
+[2019-10-03 06:59:38,087] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 06:59:38,275] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+[2019-10-03 06:59:38,280] {baseoperator.py:877} WARNING - Dependency <Task(BashOperator): dl_population_sheet>, sheet_to_text already registered
+[2019-10-03 06:59:38,280] {baseoperator.py:877} WARNING - Dependency <Task(BashOperator): sheet_to_text>, dl_population_sheet already registered
+[2019-10-03 06:59:38,291] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-daily-population-count-sheet.dl_population_sheet 2019-10-03T02:00:00+00:00 [None]>
+[2019-10-03 06:59:38,297] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-daily-population-count-sheet.dl_population_sheet 2019-10-03T02:00:00+00:00 [None]>
+[2019-10-03 06:59:38,297] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-03 06:59:38,297] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-03 06:59:38,297] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-03 06:59:38,297] {taskinstance.py:859} INFO - Executing <Task(BashOperator): dl_population_sheet> on 2019-10-03T02:00:00+00:00
+[2019-10-03 06:59:38,317] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-03 06:59:38,317] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-daily-population-count-sheet
+AIRFLOW_CTX_TASK_ID=dl_population_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-03T02:00:00+00:00
+[2019-10-03 06:59:38,318] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpzz0_iehe/dl_population_sheet4ju_hdik
+[2019-10-03 06:59:38,318] {bash_operator.py:115} INFO - Running command: source /home/airflow/.conda_environment; conda activate sc-jail-project; /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py -o /bigdata/20191002-santa-clara-daily-population-sheet.pdf
+[2019-10-03 06:59:38,321] {bash_operator.py:124} INFO - Output:
+[2019-10-03 06:59:40,089] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@91c4a016b27b:~$ ls -l /bigdata
+total 57256
+-rw-r--r-- 1 root    root     114756 Oct  1 22:48 20190920-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190920-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        659 Oct  1 22:48 20190920-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     114865 Oct  1 22:48 20190921-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190921-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        661 Oct  1 22:48 20190921-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     114783 Oct  1 22:48 20190922-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190922-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        659 Oct  1 22:48 20190922-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     115525 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        658 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     115377 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        660 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     115219 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        664 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     114896 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        659 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     114896 Oct  1 22:48 20190927-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root     115023 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.bak.pdf
+-rw-r--r-- 1 root    root     115023 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        662 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     115179 Oct  1 22:48 20190929-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root     116023 Oct  1 22:48 20190930-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow  114550 Oct  1 22:48 20191001-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow 6321888 Oct  1 20:53 20191001-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 airflow airflow     657 Oct  1 20:53 20191001-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 airflow airflow  115047 Oct  3 06:59 20191002-santa-clara-daily-population-sheet.pdf
+drwxr-xr-x 3 airflow airflow      40 Oct  2 18:05 backup
+(airflow-project) airflow@91c4a016b27b:~$ airflow list_tasks sc-jail-daily-population-count-sheet
+[2019-10-03 07:00:12,873] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1015
+[2019-10-03 07:00:12,972] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 07:00:13,150] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+dl_population_sheet
+load_with_spark
+sheet_to_text
+(airflow-project) airflow@91c4a016b27b:~$ airflow test sc-jail-daily-population-count-sheet sheet_to_text 2019-10-03T02:00:00
+[2019-10-03 07:00:51,851] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1202
+[2019-10-03 07:00:51,949] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 07:00:52,137] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+[2019-10-03 07:00:52,139] {baseoperator.py:877} WARNING - Dependency <Task(BashOperator): dl_population_sheet>, sheet_to_text already registered
+[2019-10-03 07:00:52,139] {baseoperator.py:877} WARNING - Dependency <Task(BashOperator): sheet_to_text>, dl_population_sheet already registered
+[2019-10-03 07:00:52,145] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-daily-population-count-sheet.sheet_to_text 2019-10-03T02:00:00+00:00 [None]>
+[2019-10-03 07:00:52,149] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-daily-population-count-sheet.sheet_to_text 2019-10-03T02:00:00+00:00 [None]>
+[2019-10-03 07:00:52,149] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-03 07:00:52,149] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-03 07:00:52,149] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-03 07:00:52,149] {taskinstance.py:859} INFO - Executing <Task(BashOperator): sheet_to_text> on 2019-10-03T02:00:00+00:00
+[2019-10-03 07:00:52,167] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-03 07:00:52,168] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-daily-population-count-sheet
+AIRFLOW_CTX_TASK_ID=sheet_to_text
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-03T02:00:00+00:00
+[2019-10-03 07:00:52,168] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpshqrgbeu/sheet_to_text8l50mew7
+[2019-10-03 07:00:52,168] {bash_operator.py:115} INFO - Running command: source /home/airflow/.conda_environment; conda activate sc-jail-project;     /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py     -i /bigdata/20191002-santa-clara-daily-population-sheet.pdf     -o /bigdata/20191002-santa-clara-daily-population-sheet.txt     --keep-infile     --keep-imagefile
+[2019-10-03 07:00:52,175] {bash_operator.py:124} INFO - Output:
+[2019-10-03 07:00:52,914] {bash_operator.py:132} INFO - Command exited with return code 0
+(airflow-project) airflow@91c4a016b27b:~$ ls -l /bigdata
+total 63436
+-rw-r--r-- 1 root    root     114756 Oct  1 22:48 20190920-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190920-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        659 Oct  1 22:48 20190920-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     114865 Oct  1 22:48 20190921-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190921-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        661 Oct  1 22:48 20190921-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     114783 Oct  1 22:48 20190922-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190922-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        659 Oct  1 22:48 20190922-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     115525 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        658 Oct  1 22:48 20190923-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     115377 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        660 Oct  1 22:48 20190924-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     115219 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        664 Oct  1 22:48 20190925-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root        566 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.json
+-rw-r--r-- 1 root    root     114896 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        659 Oct  1 22:48 20190926-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     114896 Oct  1 22:48 20190927-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root     115023 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.bak.pdf
+-rw-r--r-- 1 root    root     115023 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root    6321888 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 root    root        662 Oct  1 22:48 20190928-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 root    root     115179 Oct  1 22:48 20190929-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 root    root     116023 Oct  1 22:48 20190930-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow  114550 Oct  1 22:48 20191001-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow 6321888 Oct  1 20:53 20191001-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 airflow airflow     657 Oct  1 20:53 20191001-santa-clara-daily-population-sheet.txt
+-rw-r--r-- 1 airflow airflow  115047 Oct  3 06:59 20191002-santa-clara-daily-population-sheet.pdf
+-rw-r--r-- 1 airflow airflow 6321888 Oct  3 07:00 20191002-santa-clara-daily-population-sheet.tif
+-rw-r--r-- 1 airflow airflow     655 Oct  3 07:00 20191002-santa-clara-daily-population-sheet.txt
+drwxr-xr-x 3 airflow airflow      40 Oct  2 18:05 backup
+(airflow-project) airflow@91c4a016b27b:~$ more /bigdata/20191002-santa-clara-daily-population-sheet.
+more: stat of /bigdata/20191002-santa-clara-daily-population-sheet. failed: No such file or directory
+(airflow-project) airflow@91c4a016b27b:~$ more /bigdata/20191002-santa-clara-daily-population-sheet.txt 
+Office of the Sheriff
+Department of Correction
+Daily Jail Population Statistics
+
+Wednesday, October 2, 2019 as of 5:00am
+
+Laurie Smith, Sheriff
+
+Total Jail Population: 3,362 Total Jail Population by Facility:
+(Includes Intake Booking)
+Men: 2,896 Elmwood: 2,685,
+Women: 456 Main Jail: 666
+Average Length of Stay: (ALS) 181
+Men Length of Stay Women Length of Stay
+(Days) ( Days)
+Felony Sentenced: 460 16 % 212 95, 21% 155
+Misdemeanor Sentenced: 131 5% 61 23 5% 42
+Felony Unsentenced: 1,952 67 % 222 266 58% 120
+Misdemeanor Unsentenced: 361 12% 49 74 16% 49
+AGE Profile
+<18: 0 0%
+18-24: 513 15 %
+25-34: 1161 35 %
+35-44: 919 27%
+45-54: 499 15 %
+
+55+: 270 8%
+^L
+(airflow-project) airflow@91c4a016b27b:~$ airflow list_tasks sc-jail-daily-population-count-sheet
+[2019-10-03 07:01:50,411] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1506
+[2019-10-03 07:01:50,510] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 07:01:50,954] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+dl_population_sheet
+load_with_spark
+sheet_to_text
+(airflow-project) airflow@91c4a016b27b:~$ airflow test sc-jail-daily-population-count-sheet load_with_spark 2019-10-03T02:00:00
+[2019-10-03 07:02:13,241] {settings.py:213} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1620
+[2019-10-03 07:02:13,340] {__init__.py:51} INFO - Using executor LocalExecutor
+[2019-10-03 07:02:13,530] {dagbag.py:90} INFO - Filling up the DagBag from /home/airflow/dags
+[2019-10-03 07:02:13,534] {baseoperator.py:877} WARNING - Dependency <Task(BashOperator): dl_population_sheet>, sheet_to_text already registered
+[2019-10-03 07:02:13,534] {baseoperator.py:877} WARNING - Dependency <Task(BashOperator): sheet_to_text>, dl_population_sheet already registered
+[2019-10-03 07:02:13,546] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-daily-population-count-sheet.load_with_spark 2019-10-03T02:00:00+00:00 [None]>
+[2019-10-03 07:02:13,552] {taskinstance.py:620} INFO - Dependencies all met for <TaskInstance: sc-jail-daily-population-count-sheet.load_with_spark 2019-10-03T02:00:00+00:00 [None]>
+[2019-10-03 07:02:13,552] {taskinstance.py:838} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-03 07:02:13,552] {taskinstance.py:839} INFO - Starting attempt 1 of 2
+[2019-10-03 07:02:13,552] {taskinstance.py:840} INFO - 
+--------------------------------------------------------------------------------
+[2019-10-03 07:02:13,553] {taskinstance.py:859} INFO - Executing <Task(BashOperator): load_with_spark> on 2019-10-03T02:00:00+00:00
+[2019-10-03 07:02:13,569] {bash_operator.py:81} INFO - Tmp dir root location: 
+ /tmp
+[2019-10-03 07:02:13,570] {bash_operator.py:91} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=sc-jail-daily-population-count-sheet
+AIRFLOW_CTX_TASK_ID=load_with_spark
+AIRFLOW_CTX_EXECUTION_DATE=2019-10-03T02:00:00+00:00
+[2019-10-03 07:02:13,570] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpq6kwrpi2/load_with_spark319a_gq6
+[2019-10-03 07:02:13,570] {bash_operator.py:115} INFO - Running command: source /home/airflow/.conda_environment; conda activate sc-jail-project;     /opt/spark-2.4.4-bin-hadoop2.7/bin/spark-submit     --master spark://sparkmaster:7077 scripts/sc-jail-project/load-dpcs.py     -g '/bigdata/*-santa-clara-daily-population-sheet.txt'     --archive-infile
+[2019-10-03 07:02:13,574] {bash_operator.py:124} INFO - Output:
+[2019-10-03 07:02:14,668] {bash_operator.py:128} INFO - 19/10/03 07:02:14 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2019-10-03 07:02:14,844] {bash_operator.py:128} INFO - python: can't open file '/tmp/airflowtmpq6kwrpi2/scripts/sc-jail-project/load-dpcs.py': [Errno 2] No such file or directory
+[2019-10-03 07:02:14,848] {bash_operator.py:128} INFO - log4j:WARN No appenders could be found for logger (org.apache.spark.util.ShutdownHookManager).
+[2019-10-03 07:02:14,848] {bash_operator.py:128} INFO - log4j:WARN Please initialize the log4j system properly.
+[2019-10-03 07:02:14,848] {bash_operator.py:128} INFO - log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+[2019-10-03 07:02:14,869] {bash_operator.py:132} INFO - Command exited with return code 2
+[2019-10-03 07:02:14,874] {taskinstance.py:1051} ERROR - Bash command failed
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+[2019-10-03 07:02:14,875] {taskinstance.py:1080} INFO - All retries failed; marking task as FAILED
+Traceback (most recent call last):
+  File "/opt/miniconda/envs/airflow-project/bin/airflow", line 32, in <module>
+    args.func(args)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/cli.py", line 74, in wrapper
+    return f(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/bin/cli.py", line 659, in test
+    ti.run(ignore_task_deps=True, ignore_ti_state=True, test_mode=True)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1013, in run
+    session=session)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/utils/db.py", line 70, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 926, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/airflow/operators/bash_operator.py", line 136, in execute
+    raise AirflowException("Bash command failed")
+airflow.exceptions.AirflowException: Bash command failed
+(airflow-project) airflow@91c4a016b27b:~$ ls -l scripts/sc-jail-project/
+total 20
+-rwxrwxr-x 1 airflow airflow  3051 Oct  2 21:15 convert-dpcs-to-text.py
+-rwxrwxr-x 1 airflow airflow  3165 Oct  2 21:15 dl-santa-clara-dpcs.py
+-rw-rw-r-- 1 airflow airflow 12040 Oct  2 21:15 load-dpcs.py
+(airflow-project) airflow@91c4a016b27b:~$ 

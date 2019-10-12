@@ -1,0 +1,77 @@
+# conda environments:
+#
+sc-jail-project          /home/airflow/.conda/envs/sc-jail-project
+base                  *  /opt/miniconda
+airflow-project          /opt/miniconda/envs/airflow-project
+
+(base) airflow@fd96dc07e70e:~$ conda activate airflow-project
+(airflow-project) airflow@fd96dc07e70e:~$ which python
+/opt/miniconda/envs/airflow-project/bin/python
+(airflow-project) airflow@fd96dc07e70e:~$ python
+Python 3.7.4 (default, Aug 13 2019, 20:35:49) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pendulum
+>>> iso8601 = lambda t: t.format('YYYY-MM-DDTHH:mm:ssZ', formatter='alternative')
+>>> tm = pendulum.
+pendulum.DAYS_PER_WEEK            pendulum.SECONDS_PER_HOUR         pendulum.constants                pendulum.instance(                pendulum.set_test_now(
+pendulum.Date(                    pendulum.SECONDS_PER_MINUTE       pendulum.create(                  pendulum.interval(                pendulum.set_to_string_format(
+pendulum.FRIDAY                   pendulum.SUNDAY                   pendulum.date(                    pendulum.lang                     pendulum.set_transition_rule(
+pendulum.FormattableMixing(       pendulum.THURSDAY                 pendulum.datetime(                pendulum.local_timezone(          pendulum.set_translator(
+pendulum.Global(                  pendulum.TRANSITION_ERROR         pendulum.exceptions               pendulum.max                      pendulum.strptime(
+pendulum.HOURS_PER_DAY            pendulum.TUESDAY                  pendulum.formatting               pendulum.min                      pendulum.test(
+pendulum.Interval(                pendulum.TestableMixin(           pendulum.from_format(             pendulum.mixins                   pendulum.time(
+pendulum.MINUTES_PER_HOUR         pendulum.Time(                    pendulum.from_timestamp(          pendulum.now(                     pendulum.timezone(
+pendulum.MONDAY                   pendulum.Timezone(                pendulum.fromordinal(             pendulum.parse(                   pendulum.timezones
+pendulum.MONTHS_PER_YEAR          pendulum.TranslatableMixin(       pendulum.fromtimestamp(           pendulum.parser                   pendulum.today(
+pendulum.POST_TRANSITION          pendulum.UTC                      pendulum.get_formatter(           pendulum.parsing                  pendulum.tomorrow(
+pendulum.PRE_TRANSITION           pendulum.WEDNESDAY                pendulum.get_locale(              pendulum.pendulum                 pendulum.translator(
+pendulum.Pendulum(                pendulum.WEEKS_PER_YEAR           pendulum.get_test_now(            pendulum.period(                  pendulum.tz
+pendulum.Period(                  pendulum.YEARS_PER_CENTURY        pendulum.get_transition_rule(     pendulum.reset_to_string_format(  pendulum.utcfromtimestamp(
+pendulum.SATURDAY                 pendulum.YEARS_PER_DECADE         pendulum.has_test_now(            pendulum.set_formatter(           pendulum.utcnow(
+pendulum.SECONDS_PER_DAY          pendulum.combine(                 pendulum.helpers                  pendulum.set_locale(              pendulum.yesterday(
+>>> tm = pendulum.now()
+>>> tm
+<Pendulum [2019-10-11T01:32:18.729318+00:00]>
+>>> iso8601(tm)
+'2019-10-11T01:32:18+0000'
+>>> to_pacific_tz = lambda utc_iso8601: datetime.strptime(utc_iso8601, "%Y-%m-%dT%H:%M:%S%z") \
+...                   .astimezone(pytz.timezone('America/Los_Angeles')) \
+...                   .strftime('%Y%m%d')
+>>> to_pacific_tz(iso8601(tm))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 1, in <lambda>
+NameError: name 'datetime' is not defined
+>>> import datetime
+>>> to_pacific_tz(iso8601(tm))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 1, in <lambda>
+AttributeError: module 'datetime' has no attribute 'strptime'
+>>> from datetime import datetime
+>>> to_pacific_tz(iso8601(tm))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in <lambda>
+NameError: name 'pytz' is not defined
+>>> import pytz
+>>> to_pacific_tz(iso8601(tm))
+'20191010'
+>>> tm2 = pendulum.from
+pendulum.from_format(     pendulum.from_timestamp(  pendulum.fromordinal(     pendulum.fromtimestamp(   
+>>> tm2 = pendulum.from_timestamp('2019-10-09T14:00:00+00:00')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/opt/miniconda/envs/airflow-project/lib/python3.7/site-packages/pendulum/pendulum.py", line 491, in create_from_timestamp
+    dt = datetime.datetime.utcfromtimestamp(timestamp).replace(tzinfo=UTC)
+TypeError: an integer is required (got type str)
+>>> tm2 = pendulum.strptime('2019-10-09T14:00:00+00:00', '%Y-%m-%dT%H:%M:%S%z')
+>>> tm2
+<Pendulum [2019-10-09T14:00:00+00:00]>
+>>> to_pacific_tz(iso8601(tm2))
+'20191009'
+>>> tm3 = pendulum.strptime('2019-10-09T06:59:00+00:00', '%Y-%m-%dT%H:%M:%S%z')
+>>> to_pacific_tz(iso8601(tm3))
+'20191008'
+>>> 
