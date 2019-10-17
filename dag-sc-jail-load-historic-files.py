@@ -25,7 +25,7 @@ default_args = {
 }
 
 # Every day schedule will run at +2/+3hrs after publication. Container in UTC, publication in Pacific
-dag = DAG('sc-jail-daily-population-count-sheet',
+dag = DAG('sc-jail-load-historic-files',
           default_args=default_args,
           schedule_interval='@once',
           dagrun_timeout=timedelta(minutes=5),
