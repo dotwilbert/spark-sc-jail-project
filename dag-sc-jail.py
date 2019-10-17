@@ -90,7 +90,7 @@ load_with_spark_task = BashOperator(
 staging_to_tables_task = BashOperator(
     task_id='staging_to_tables',
     bash_command="/home/airflow/bin/staging2prod \
-        -c /home/airflow/bin/config.properties \
+        -c /home/airflow/bin/staging2prod.properties \
         -l {{ task_instance.xcom_pull(key='load_id', task_ids='generate_load_id')}}",
     dag=dag,
 )
