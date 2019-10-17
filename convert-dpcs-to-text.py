@@ -6,23 +6,13 @@ import tempfile
 import shutil
 import subprocess
 
-
-def check_filename(fn: str) -> bool:
-    p = pathlib.Path(fn)
-    if not p.exists:
-        raise ValueError(f'File: {str(p)} does not exist')
-    if not p.is_file:
-        raise ValueError(f'File: {str(p)} is not a regular file')
-    return True
-
 def check_directory(dn: str) -> bool:
     p = pathlib.Path(dn)
-    if not p.exists:
+    if not p.exists():
         raise ValueError(f'Directory: {str(p)} does not exist')
-    if not p.is_dir:
+    if not p.is_dir():
         raise ValueError(f'Directory: {str(p)} is not a directory')
     return True
-
 
 def convert_infile_to_image(fn: str, wd: str) -> str:
     image_file = f'{wd}/{pathlib.PurePath(fn).stem}'
@@ -63,26 +53,26 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    if not check_filename(args.infile):
-        exit(1)
+    if not pathlib.Path(args.infile).exists():
+        raise ValueError(f'File: {str(p)} does not exist')
+    
+    if not pathlib.Path(args.infile).is_file():
+        raise ValueError(f'File: {str(p)} is not a regular file')
 
     if not check_directory(pathlib.PurePath(args.outfile).parent):
         exit(1)
 
-    workdir = tempfile.mkdtemp()
-
-    image_file = convert_infile_to_image(args.infile, workdir)
-    text_file = convert_imagefile_to_text(image_file, workdir)
-    
-#    pathlib.Path(text_file).rename(args.outfile)
-    shutil.move(pathlib.PurePath(text_file), args.outfile)
-
+    if pathlib.Path(args.outfile).exists():
+        print(f'File {args.outfile} exists. Will not overwrite.')
+    else:
+        workdir = tempfile.mkdtemp()
+        image_file = convert_infile_to_image(args.infile, workdir)
+        text_file = convert_imagefile_to_text(image_file, workdir)
+        shutil.move(pathlib.PurePath(text_file), args.outfile)
+        if args.keep_imagefile:
+            p = pathlib.PurePath(args.outfile).parent
+            shutil.move(pathlib.PurePath(image_file), f'{p}/{pathlib.PurePath(image_file).name}')
+        shutil.rmtree(workdir)
+        
     if args.delete_infile:
         pathlib.Path(args.infile).unlink()
-
-    if args.keep_imagefile:
-        p = pathlib.PurePath(args.outfile).parent
-#        pathlib.Path(image_file).rename(f'{p}/{pathlib.PurePath(image_file).name}')
-        shutil.move(pathlib.PurePath(image_file), f'{p}/{pathlib.PurePath(image_file).name}')
-        
-    shutil.rmtree(workdir)

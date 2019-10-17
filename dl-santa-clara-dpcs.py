@@ -1,4 +1,11 @@
 #! /usr/bin/env python
+
+"""Download Santa Clara County Jail Population Count Sheet
+   
+   Downloads the population count sheet for the Santa Clara
+   County Jail. It opens the container page, locates the
+   link and downloads the pdf.
+"""
 import argparse
 import pathlib
 from datetime import datetime
@@ -85,10 +92,10 @@ if __name__ == '__main__':
         description='Download Santa Clara Daily Inmate Population Count sheet ')
     parser.add_argument(
         '-o', '--outfile', help=f'filename to store the sheet (default: {default_filename})', default=default_filename)
+    parser.add_argument('-v', '--version', action='store_true', help='display program version')
     args = parser.parse_args()
 
     if pathlib.Path(args.outfile).exists():
-        raise ValueError(f'File {args.outfile} exists. Will not overwrite.')
-    
-    population_count_sheet_url = get_population_count_url(container_url)
-    download_population_count_sheet(population_count_sheet_url, args.outfile)
+        print(f'File {args.outfile} exists. Will not overwrite.')
+    else:
+        download_population_count_sheet(get_population_count_url(container_url), args.outfile)

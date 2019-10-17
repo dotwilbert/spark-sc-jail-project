@@ -5,20 +5,31 @@ import operator
 import pathlib
 import re
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from glob import glob
 from typing import List
 
-import pytz
-
 import Levenshtein
-from pyspark.sql import SparkSession, DataFrameWriter
-from pyspark.sql.types import *
+import pendulum
+from pyspark.sql import DataFrameWriter, SparkSession
+from pyspark.sql.types import (IntegerType, StringType, StructField,
+                               StructType, TimestampType)
 
 
 class Configuration:
-    load_id=str(uuid.uuid4())
-    load_date=pytz.timezone('America/Los_Angeles').localize(datetime.now()).strftime('%Y-%m-%dT%H:%M:%S%z')
+    load_id = str(uuid.uuid4())
+    _load_date = pendulum.now()
+    load_date = datetime(
+        _load_date.in_timezone('UTC').year,
+        _load_date.in_timezone('UTC').month,
+        _load_date.in_timezone('UTC').day,
+        _load_date.in_timezone('UTC').hour,
+        _load_date.in_timezone('UTC').minute,
+        _load_date.in_timezone('UTC').second,
+        _load_date.in_timezone('UTC').microsecond,
+        tzinfo=timezone.utc,
+    )
+
 
 class SCDailyJailPopulationReport:
     line_expectations = {
@@ -84,7 +95,17 @@ class SCDailyJailPopulationReport:
         if m_time.group(3) == 'pm' and hour < 12:
             hour += 12
 
-        return pytz.timezone('America/Los_Angeles').localize(datetime(year_number, month_no, day_number, hour, minute))
+        _tt = pendulum.create(year_number, month_no, day_number,
+                              hour, minute, tz='America/Los_Angeles')
+
+        return datetime(
+            _tt.in_timezone('UTC').year,
+            _tt.in_timezone('UTC').month,
+            _tt.in_timezone('UTC').day,
+            _tt.in_timezone('UTC').hour,
+            _tt.in_timezone('UTC').minute,
+            tzinfo=timezone.utc,
+        )
 
     def determine_sheriff(self, s: str) -> str:
         m = re.match(r'^(.*)[,.]\s+(\S+)$', s)
@@ -111,8 +132,7 @@ class SCDailyJailPopulationReport:
                         raise ValueError(
                             f'Expected line {line_counter}: "{SCDailyJailPopulationReport.line_expectations[line_counter]}". Actual: "{line}"')
                 elif line_counter == 4:
-                    databag['report_date'] = self.determine_date(line).astimezone(
-                        pytz.timezone('UTC')).strftime("%Y-%m-%dT%H:%M:%S%z")
+                    databag['report_date'] = self.determine_date(line)
                 elif line_counter == 5:
                     databag['sheriff'] = self.determine_sheriff(line)
                 elif line_counter == 6:
@@ -185,7 +205,9 @@ if __name__ == "__main__":
         '-u', '--user', help='User for the database', required=True)
     parser.add_argument(
         '-p', '--password', help='Password for the database', required=True)
-            
+    parser.add_argument(
+        '-i', '--load_id', help=f'UUID identifier for the load (default: random)', default=Configuration.load_id)
+
     cleanup_infile = parser.add_mutually_exclusive_group(required=True)
     cleanup_infile.add_argument(
         '--archive-infile', action='store_true', help="Don't clean up the input file")
@@ -193,6 +215,7 @@ if __name__ == "__main__":
         '--delete-infile', action='store_true', help="Clean up the input file")
 
     args = parser.parse_args()
+    Configuration.load_id = args.load_id
     spark = SparkSession \
         .builder \
         .appName('ETL sc-jail-project') \
@@ -206,30 +229,47 @@ if __name__ == "__main__":
         raise ValueError(
             f'At least one of the files in {args.glob} is not a regular file')
 
-    df = spark.sparkContext \
+    rdd = spark.sparkContext \
         .parallelize(files) \
-        .flatMap(process_file) \
-        .toDF(['LOAD_ID',
-               'LOAD_TIME',
-               'REPORT_DATE',
-               'SHERIFF',
-               'COUNT_POPULATION_TOTAL',
-               'COUNT_POPULATION_TOTAL_MEN',
-               'COUNT_POPULATION_TOTAL_WOMEN',
-               'COUNT_POPULATION_SENTENCED_FELONY_MEN',
-               'COUNT_POPULATION_SENTENCED_FELONY_WOMEN',
-               'COUNT_POPULATION_SENTENCED_MISDEMEANOR_MEN',
-               'COUNT_POPULATION_SENTENCED_MISDEMEANOR_WOMEN',
-               'COUNT_POPULATION_UNSENTENCED_FELONY_MEN',
-               'COUNT_POPULATION_UNSENTENCED_FELONY_WOMEN',
-               'COUNT_POPULATION_UNSENTENCED_MISDEMEANOR_MEN',
-               'COUNT_POPULATION_UNSENTENCED_MISDEMEANOR_WOMEN'])
+        .flatMap(process_file)
+
+    schema = StructType(
+        [
+            StructField('LOAD_ID_STR', StringType(), nullable=True),
+            StructField('LOAD_TIME', TimestampType(), nullable=True),
+            StructField('REPORT_DATE', TimestampType(), nullable=True),
+            StructField('SHERIFF', StringType(), nullable=True),
+            StructField('COUNT_POPULATION_TOTAL',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_TOTAL_MEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_TOTAL_WOMEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_SENTENCED_FELONY_MEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_SENTENCED_FELONY_WOMEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_SENTENCED_MISDEMEANOR_MEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_SENTENCED_MISDEMEANOR_WOMEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_UNSENTENCED_FELONY_MEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_UNSENTENCED_FELONY_WOMEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_UNSENTENCED_MISDEMEANOR_MEN',
+                        IntegerType(), nullable=True),
+            StructField('COUNT_POPULATION_UNSENTENCED_MISDEMEANOR_WOMEN',
+                        IntegerType(), nullable=True),
+        ]
+    )
+    df = spark.createDataFrame(rdd, schema)
 
     df.show()
     url_connect = f'jdbc:postgresql://database:5432/{args.schema}'
     table = "staging"
     mode = "append"
-    properties = {"user":args.user, "password":args.password}
+    properties = {"user": args.user, "password": args.password}
 
     df.write.jdbc(
         url=url_connect,
@@ -237,40 +277,5 @@ if __name__ == "__main__":
         mode=mode,
         properties=properties
     )
-    
+
     print(f'load_id:{Configuration.load_id}')
-# >>> from pyspark.sql import SparkSession
-# >>> from glob import glob
-# >>> spark = SparkSession.builder.appName('ETL sc-jail-project').getOrCreate()
-# >>> files = glob('/bigdata/*-santa-clara-daily-population-sheet.txt')
-# >>> files
-# ['/bigdata/20191001-santa-clara-daily-population-sheet.txt', '/bigdata/20190920-santa-clara-daily-population-sheet.txt', '/bigdata/20190921-santa-clara-daily-population-sheet.txt', '/bigdata/20190922-santa-clara-daily-population-sheet.txt', '/bigdata/20190923-santa-clara-daily-population-sheet.txt', '/bigdata/20190924-santa-clara-daily-population-sheet.txt', '/bigdata/20190925-santa-clara-daily-population-sheet.txt', '/bigdata/20190926-santa-clara-daily-population-sheet.txt', '/bigdata/20190928-santa-clara-daily-population-sheet.txt']
-# >>> from pyspark.sql import SparkSession
-# >>> from glob import glob
-# >>> spark = SparkSession.builder.appName('ETL sc-jail-project').getOrCreate()
-# >>> files = glob('/bigdata/*-santa-clara-daily-population-sheet.txt')
-# >>> files
-# ['/bigdata/20191001-santa-clara-daily-population-sheet.txt', '/bigdata/20190920-santa-clara-daily-population-sheet.txt', '/bigdata/20190921-santa-clara-daily-population-sheet.txt', '/bigdata/20190922-santa-clara-daily-population-sheet.txt', '/bigdata/20190923-santa-clara-daily-population-sheet.txt', '/bigdata/20190924-santa-clara-daily-population-sheet.txt', '/bigdata/20190925-santa-clara-daily-population-sheet.txt', '/bigdata/20190926-santa-clara-daily-population-sheet.txt', '/bigdata/20190928-santa-clara-daily-population-sheet.txt']
-# >>> sc = spark.sparkContext
-# >>> sc.parallelize(files,2).glom().collect()
-# [['/bigdata/20191001-santa-clara-daily-population-sheet.txt', '/bigdata/20190920-santa-clara-daily-population-sheet.txt', '/bigdata/20190921-santa-clara-daily-population-sheet.txt', '/bigdata/20190922-santa-clara-daily-population-sheet.txt'], ['/bigdata/20190923-santa-clara-daily-population-sheet.txt', '/bigdata/20190924-santa-clara-daily-population-sheet.txt', '/bigdata/20190925-santa-clara-daily-population-sheet.txt', '/bigdata/20190926-santa-clara-daily-population-sheet.txt', '/bigdata/20190928-santa-clara-daily-population-sheet.txt']]
-# >>> from datetime import datetime
-# >>> def hoopla(file: str) -> [datetime, str]:
-# ...     el = file.split(sep='-', maxsplit=1)
-# ...     dt, val = el[0], el[1]
-# ...     yield [dt, val]
-# ...
-# >>> r = sc.parallelize(files).flatMap(hoopla).toDF(['RECORD_DATE', 'FILENAME']).show()
-# +-----------------+--------------------+
-# |      RECORD_DATE|            FILENAME|
-# +-----------------+--------------------+
-# |/bigdata/20191001|santa-clara-daily...|
-# |/bigdata/20190920|santa-clara-daily...|
-# |/bigdata/20190921|santa-clara-daily...|
-# |/bigdata/20190922|santa-clara-daily...|
-# |/bigdata/20190923|santa-clara-daily...|
-# |/bigdata/20190924|santa-clara-daily...|
-# |/bigdata/20190925|santa-clara-daily...|
-# |/bigdata/20190926|santa-clara-daily...|
-# |/bigdata/20190928|santa-clara-daily...|
-# +-----------------+--------------------+
