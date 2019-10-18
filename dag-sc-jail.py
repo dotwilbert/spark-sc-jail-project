@@ -12,7 +12,7 @@ from airflow.operators.python_operator import PythonOperator
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': airflow.utils.dates.days_ago(1),
+    'start_date': '##TODAY##',
     'email': ['airflow@theairflower.com'],
     'email_on_failure': False,
     'email_on_retry': False,
