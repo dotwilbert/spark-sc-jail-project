@@ -65,8 +65,7 @@ sheet_to_text_task = BashOperator(
     /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
     -i /bigdata/{{ execution_date | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.pdf \
     -o /bigdata/{{ execution_date | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.txt \
-    --keep-infile \
-    --keep-imagefile',
+    --keep-infile',
     dag=dag,
 )
 

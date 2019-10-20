@@ -43,6 +43,17 @@ generate_load_id_task = PythonOperator(
     provide_context=True
 )
 
+sheet_to_text_task = BashOperator(
+    task_id='sheet_to_text',
+    bash_command='source /home/airflow/.conda_environment; conda activate airflow-project; \
+    for pdf in /bigdata/*-santa-clara-daily-population-sheet.pdf; do \
+    /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
+    -i "${pdf}" \
+    -o $(dirname "${pdf}")/$(basename -s .pdf "${pdf}").txt \
+    --keep-infile; done',
+    dag=dag,
+)
+
 load_with_spark_task = BashOperator(
     task_id='load_with_spark',
     bash_command="source /home/airflow/.conda_environment; conda activate airflow-project; \
