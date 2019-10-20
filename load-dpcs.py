@@ -68,7 +68,7 @@ class SCDailyJailPopulationReport:
 
     def determine_date(self, dtstr: str) -> datetime:
         dtmre = re.compile(
-            r'^[^,.]+.\s*(\S+)\s*([^,.]*).\s*(....)\s*\S+\s*\S+\s*(\S+)$')
+            r'^[^,.]+.\s*(\S+)\s*([0-9]{1,2}).\s*(....)\s*\S+?\s*\S+?\s*([0-9:;apm]+)$')
         m_datetime = dtmre.match(dtstr)
         if m_datetime is None:
             raise ValueError(f'Cannot detect date in {dtstr}')
@@ -119,6 +119,7 @@ class SCDailyJailPopulationReport:
         return int(re.sub(r'[,.]', '', s))
 
     def process(self) -> None:
+        re_merge_blanks = re.compile(r'\s{2,}')
         line_counter = 0
         databag = {}
         with open(self.fn, mode='r+t', encoding='utf-8') as fd:
@@ -127,6 +128,8 @@ class SCDailyJailPopulationReport:
                 if line.strip() == '':
                     continue
                 line_counter += 1
+                # Remove leading and trailing whitespace, merge delimiters
+                line = re_merge_blanks(' ', line.strip())
                 if line_counter in range(1, 4):
                     if not self.check_line(line_counter, line):
                         raise ValueError(
@@ -156,7 +159,7 @@ class SCDailyJailPopulationReport:
                             f'Line is unlikely to carry {SCDailyJailPopulationReport.line_expectations[line_counter]} info: {line}')
                     if not self.check_line(line_counter, m.group(1)):
                         raise ValueError(
-                            f'Line is unlikely to carry {SCDailyJailPopulationReport.line_expectations[line_counter]} info: {m.group(1)}')
+                            f'Capture group is unlikely to carry {SCDailyJailPopulationReport.line_expectations[line_counter]} info: {m.group(1)}')
                     databag[SCDailyJailPopulationReport.field_combos[line_counter]
                             [0]] = self.parse_int(m.group(2))
                     databag[SCDailyJailPopulationReport.field_combos[line_counter]
