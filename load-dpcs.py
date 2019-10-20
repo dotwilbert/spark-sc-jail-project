@@ -129,7 +129,7 @@ class SCDailyJailPopulationReport:
                     continue
                 line_counter += 1
                 # Remove leading and trailing whitespace, merge delimiters
-                line = re_merge_blanks(' ', line.strip())
+                line = re_merge_blanks.sub(' ', line.strip())
                 if line_counter in range(1, 4):
                     if not self.check_line(line_counter, line):
                         raise ValueError(
