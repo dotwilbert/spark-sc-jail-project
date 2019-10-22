@@ -36,18 +36,18 @@ class SCDailyJailPopulationReport:
         1: 'Office of the Sheriff',
         2: 'Department of Correction',
         3: 'Daily Jail Population Statistics',
-        13: 'Felony Sentenced',
-        14: 'Misdemeanor Sentenced',
-        15: 'Felony Unsentenced',
-        16: 'Misdemeanor Unsentenced'
+        14: 'Felony Sentenced',
+        15: 'Misdemeanor Sentenced',
+        16: 'Felony Unsentenced',
+        17: 'Misdemeanor Unsentenced'
     }
     month_names = ['January', 'February', 'March', 'April', 'May', 'June',
                    'July', 'August', 'September', 'October', 'November', 'December']
     field_combos = {
-        13: ('size_population_sentenced_felony_men', 'size_population_sentenced_felony_women'),
-        14: ('size_population_sentenced_misdemeanor_men', 'size_population_sentenced_misdemeanor_women'),
-        15: ('size_population_unsentenced_felony_men', 'size_population_unsentenced_felony_women'),
-        16: ('size_population_unsentenced_misdemeanor_men', 'size_population_unsentenced_misdemeanor_women')
+        14: ('size_population_sentenced_felony_men', 'size_population_sentenced_felony_women'),
+        15: ('size_population_sentenced_misdemeanor_men', 'size_population_sentenced_misdemeanor_women'),
+        16: ('size_population_unsentenced_felony_men', 'size_population_unsentenced_felony_women'),
+        17: ('size_population_unsentenced_misdemeanor_men', 'size_population_unsentenced_misdemeanor_women')
     }
 
     def __init__(self, fn: str) -> None:
@@ -151,9 +151,9 @@ class SCDailyJailPopulationReport:
                     m = re.match(r'^[^:;]*[:;]\s+([0-9,.]+)\s+.*$', line)
                     databag['size_population_total_women'] = self.parse_int(
                         m.group(1))
-                elif line_counter in range(13, 17):
+                elif line_counter in range(14, 18):
                     m = re.match(
-                        r'^([^:;]*)[:;]\s+([0-9,.]+)\s+[^%]+%\s.*?([0-9,.]+)\s+[0-9,.]+%.*$', line)
+                        r'^([^:;]*)[:;]\s+([0-9,.]+)\s+[0-9]+\s*%\s*[0-9]+\s+([0-9]+)\s+[0-9]+\s*%.*$', line)
                     if m is None:
                         raise ValueError(
                             f'Line is unlikely to carry {SCDailyJailPopulationReport.line_expectations[line_counter]} info: {line}')
