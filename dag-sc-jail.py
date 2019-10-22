@@ -8,6 +8,7 @@ import pendulum
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.latest_only_operator import LatestOnlyOperator
 
 default_args = {
     'owner': 'airflow',
@@ -94,8 +95,13 @@ staging_to_tables_task = BashOperator(
     dag=dag,
 )
 
-dl_task >> sheet_to_text_task >> load_with_spark_task
-generate_load_id_task >> load_with_spark_task
+only_run_current_date_task = LatestOnlyOperator (
+    task_id='only_run_current_date',
+    dag=dag,
+)
+
+only_run_current_date_task >> dl_task >> sheet_to_text_task >> load_with_spark_task
+only_run_current_date_task >> generate_load_id_task >> load_with_spark_task
 load_with_spark_task >> staging_to_tables_task
 
 if __name__ == "__main__":
