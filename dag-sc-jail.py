@@ -55,7 +55,7 @@ dl_task = BashOperator(
     bash_command='source /home/airflow/.conda_environment;\
         conda activate airflow-project;\
         /home/airflow/scripts/sc-jail-project/dl-santa-clara-dpcs.py\
-        -o /bigdata/{{ execution_date | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.pdf',
+        -o /bigdata/{{ execution_date.add(days=1) | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.pdf',
     params={'retries': 3},
     dag=dag,
 )
@@ -64,8 +64,8 @@ sheet_to_text_task = BashOperator(
     task_id='sheet_to_text',
     bash_command='source /home/airflow/.conda_environment; conda activate airflow-project; \
     /home/airflow/scripts/sc-jail-project/convert-dpcs-to-text.py \
-    -i /bigdata/{{ execution_date | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.pdf \
-    -o /bigdata/{{ execution_date | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.txt \
+    -i /bigdata/{{ execution_date.add(days=1) | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.pdf \
+    -o /bigdata/{{ execution_date.add(days=1) | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.txt \
     --keep-infile',
     dag=dag,
 )
@@ -78,7 +78,7 @@ load_with_spark_task = BashOperator(
     --driver-class-path /usr/share/java/postgresql.jar \
     --jars local:///usr/share/java/postgresql.jar \
     /home/airflow/scripts/sc-jail-project/load-dpcs.py \
-    -g '/bigdata/{{ execution_date | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.txt' \
+    -g '/bigdata/{{ execution_date.add(days=1) | iso8601 | to_pacific_date }}-santa-clara-daily-population-sheet.txt' \
     -u $SC_JAIL_USER \
     -p $SC_JAIL_PASSWORD \
     -s $SC_JAIL_DB \
