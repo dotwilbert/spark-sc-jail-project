@@ -28,7 +28,7 @@ default_args = {
 # Every day schedule will run at +2/+3hrs after publication. Container in UTC, publication in Pacific
 dag = DAG('sc-jail-daily-population-count-sheet',
           default_args=default_args,
-          schedule_interval='0 14 * * *',
+          schedule_interval='30 15 * * *',
           user_defined_filters={
               'iso8601': lambda t: t.to_iso8601_string(),
               'to_pacific_date': lambda utc_iso8601: pendulum.parse(utc_iso8601)
